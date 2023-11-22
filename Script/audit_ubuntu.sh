@@ -184,7 +184,7 @@ rem_1_3_1=$(cat  <<  EOF
 1.3.1 Thực hiện câu lệnh sau và đảm bảo rằng aide được cài đặt:
  apt install aide aide-common
  aideinit
- mv /var/lib/aide/aide_db_new /var/lib/aide/aide_db
+ mv /var/lib/aide/aide.db.new /var/lib/aide/aide.db
 EOF
 )
 #########################################################################
@@ -628,7 +628,7 @@ else
 fi
 
 if [ remember_2_3_1==true ] ; then
-    echo "$rem_2_3_1" >> $remediation_filenameS
+    echo "$rem_2_3_1" >> $remediation_filename
 fi
 
 ############################################################################
@@ -640,8 +640,8 @@ echo "$info $var_3_1"
 rem_3_1_1=$(cat  <<  EOF 
 3.1.1 Thực hiện đoạn script sau:
  grep -Els "^\s*net\.ipv4\.ip_forward\s*=\s*1" /etc/sysctl.conf /etc/sysctl.d/*.conf /usr/lib/sysctl.d/*.conf /run/sysctl.d/*.conf | while read filename; do sed -ri "s/^\s*(net\.ipv4\.ip_forward\s*)(=)(\s*\S+\b).*$/# *REMOVED* \1/" $filename; done; sysctl -w net.ipv4.ip_forward=0; sysctl -w net.ipv4.route.flush=1
- grep -Els "^\s*net\.ipv6\.conf\.all\.forwarding\s*=\s*1" /etc/sysctl.conf /etc/sysctl.d/*.conf /usr/lib/sysctl.d/*.conf /run/sysctl.d/*.conf | while read filename; do sed -ri "s/^\s*(net\.ipv6\.conf\.all\.forwarding\s*)(=)(\s*\S+\b).*$/# *REMOVED* \1/"
-$filename; done; sysctl -w net.ipv6.conf.all.forwarding=0; sysctl -w net.ipv6.route.flush=1 thực hiện thêm dòng net.ipv4.ip_forward=0 vào cuối file /etc/sysctl.conf
+ grep -Els "^\s*net\.ipv6\.conf\.all\.forwarding\s*=\s*1" /etc/sysctl.conf /etc/sysctl.d/*.conf /usr/lib/sysctl.d/*.conf /run/sysctl.d/*.conf | while read filename; do sed -ri "s/^\s*(net\.ipv6\.conf\.all\.forwarding\s*)(=)(\s*\S+\b).*$/# *REMOVED* \1/" $filename; done; sysctl -w net.ipv6.conf.all.forwarding=0; sysctl -w net.ipv6.route.flush=1 
+ Thực hiện thêm dòng net.ipv4.ip_forward=0 vào cuối file /etc/sysctl.conf
 EOF
 )
 
@@ -656,12 +656,12 @@ fi
 
 rem_3_1_2=$(cat  <<  EOF 
 3.1.2 Đặt các tham số sau vào file /etc/sysctl.conf hoặc /etc/sysctl.d/*
- net.ipv4.conf.all.send_redirects = 0
- net.ipv4.conf.default.send_redirects = 0
- Thực hiện các câu lệnh sau để đặt tham số vào kernel đang hoạt động:
- sysctl -w net.ipv4.conf.all.send_redirects=0
- sysctl -w net.ipv4.conf.default.send_redirects=0
- sysctl -w net.ipv4.route.flush=1
+net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
+Thực hiện các câu lệnh sau để đặt tham số vào kernel đang hoạt động:
+sysctl -w net.ipv4.conf.all.send_redirects=0
+sysctl -w net.ipv4.conf.default.send_redirects=0
+sysctl -w net.ipv4.route.flush=1
 EOF
 )
 
@@ -680,14 +680,14 @@ echo "$info $var_3_2"
 
 rem_3_2_1=$(cat  <<  EOF 
 3.2.1 Đặt các thông số sau vào file /etc/sysctl.conf hoặc /etc/sysctl.d/*:
- net.ipv4.conf.all.accept_source_route = 0
- net.ipv4.conf.default.accept_source_route = 0
- net.ipv6.conf.all.accept_source_route = 0
- net.ipv6.conf.default.accept_source_route = 0
- Thực hiện các câu lệnh sau để đặt các tham số vào kernel đang hoạt động:
- sysctl -w net.ipv4.conf.all.accept_source_route=0
- sysctl -w net.ipv4.conf.default.accept_source_route=0
- sysctl -w net.ipv4.route.flush=1
+net.ipv4.conf.all.accept_source_route = 0
+net.ipv4.conf.default.accept_source_route = 0
+net.ipv6.conf.all.accept_source_route = 0
+net.ipv6.conf.default.accept_source_route = 0
+Thực hiện các câu lệnh sau để đặt các tham số vào kernel đang hoạt động:
+sysctl -w net.ipv4.conf.all.accept_source_route=0
+sysctl -w net.ipv4.conf.default.accept_source_route=0
+sysctl -w net.ipv4.route.flush=1
 EOF
 )
 
@@ -703,14 +703,14 @@ fi
 ############################################################################
 rem_3_2_2=$(cat  <<  EOF 
 3.2.2 Đặt các tham số sau và file /etc/sysctl.conf hoặc /etc/sysctl.d/*:
- net.ipv4.conf.all.accept_redirects = 0
- net.ipv4.conf.default.accept_redirects = 0
- net.ipv6.conf.all.accept_redirects = 0
- net.ipv6.conf.default.accept_redirects = 0
- Thực hiện các câu lệnh sau để đặt các tham số vào kernel đang hoạt động:
- sysctl -w net.ipv4.conf.all.accept_redirects=0
- sysctl -w net.ipv4.conf.default.accept_redirects=0
- sysctl -w net.ipv4.route.flush=1
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0
+net.ipv6.conf.all.accept_redirects = 0
+net.ipv6.conf.default.accept_redirects = 0
+Thực hiện các câu lệnh sau để đặt các tham số vào kernel đang hoạt động:
+sysctl -w net.ipv4.conf.all.accept_redirects=0
+sysctl -w net.ipv4.conf.default.accept_redirects=0
+sysctl -w net.ipv4.route.flush=1
 EOF
 )
 
@@ -725,12 +725,12 @@ fi
 ############################################################################
 rem_3_2_3=$(cat  <<  EOF 
 3.2.3 Đặt các tham số sau vào file /etc/sysctl.conf hoặc /etc/sysctl.d/*:
- net.ipv4.conf.all.secure_redirects = 0
- net.ipv4.conf.default.secure_redirects = 0
- Thực hiện các câu lệnh sau để đặt các tham số vào kernel đang hoạt động:
- sysctl -w net.ipv4.conf.all.secure_redirects=0
- sysctl -w net.ipv4.conf.default.secure_redirects=0
- sysctl -w net.ipv4.route.flush=1
+net.ipv4.conf.all.secure_redirects = 0
+net.ipv4.conf.default.secure_redirects = 0
+Thực hiện các câu lệnh sau để đặt các tham số vào kernel đang hoạt động:
+sysctl -w net.ipv4.conf.all.secure_redirects=0
+sysctl -w net.ipv4.conf.default.secure_redirects=0
+sysctl -w net.ipv4.route.flush=1
 EOF
 )
 
@@ -745,11 +745,11 @@ fi
 ############################################################################
 rem_3_2_4=$(cat  <<  EOF 
 3.2.4  Đặt các tham số sau và file /etc/sysctl.conf hoặc file /etc/sysctl.d/*:
- net.ipv4.conf.all.log_martians = 1
- net.ipv4.conf.default.log_martians = 1
- Thực hiện các câu lệnh sau để đặt các tham số vào kernel đang hoạt động:
- sysctl -w net.ipv4.conf.all.log_martians=1
- sysctl -w net.ipv4.conf.default.log_martians=1
+net.ipv4.conf.all.log_martians = 1
+net.ipv4.conf.default.log_martians = 1
+Thực hiện các câu lệnh sau để đặt các tham số vào kernel đang hoạt động:
+sysctl -w net.ipv4.conf.all.log_martians=1
+sysctl -w net.ipv4.conf.default.log_martians=1
 EOF
 )
 
@@ -764,9 +764,9 @@ fi
 ############################################################################
 rem_3_2_5=$(cat  <<  EOF 
 3.2.5 Đặt tham số sau vào file /etc/sysctl.conf hoặc /etc/sysctl.d/*:
- net.ipv4.icmp_echo_ignore_broadcasts = 1
- Thực hiện các câu lệnh sau để đặt tham số vào kernel đang hoạt động:
- sysctl -w net.ipv4.icmp_echo_ignore_broadcasts=1
+net.ipv4.icmp_echo_ignore_broadcasts = 1
+Thực hiện các câu lệnh sau để đặt tham số vào kernel đang hoạt động:
+sysctl -w net.ipv4.icmp_echo_ignore_broadcasts=1
 EOF
 )
 
@@ -781,9 +781,9 @@ fi
 ############################################################################
 rem_3_2_6=$(cat  <<  EOF 
 3.2.6 Đặt tham số sau vào file /etc/sysctl.conf hoặc /etc/sysctl.d/*:
- net.ipv4.icmp_ignore_bogus_error_responses = 1
- Thực hiện các câu lệnh sau để đặt tham số vào kernel đang hoạt động:
- sysctl -w net.ipv4.icmp_ignore_bogus_error_responses=1
+net.ipv4.icmp_ignore_bogus_error_responses = 1
+Thực hiện các câu lệnh sau để đặt tham số vào kernel đang hoạt động:
+sysctl -w net.ipv4.icmp_ignore_bogus_error_responses=1
 EOF
 )
 
@@ -798,11 +798,11 @@ fi
 ############################################################################
 rem_3_2_7=$(cat  <<  EOF 
 3.2.7 Đặt các tham số sau vào file /etc/sysctl.conf hoặc /etc/sysctl.d/*:
- net.ipv4.conf.all.rp_filter = 1
- net.ipv4.conf.default.rp_filter = 1
- Thực hiện các câu lệnh sau để đặt các tham số vào kernel đang hoạt động:
- sysctl -w net.ipv4.conf.all.rp_filter=1
- sysctl -w net.ipv4.conf.default.rp_filter=1
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.default.rp_filter = 1
+Thực hiện các câu lệnh sau để đặt các tham số vào kernel đang hoạt động:
+sysctl -w net.ipv4.conf.all.rp_filter=1
+sysctl -w net.ipv4.conf.default.rp_filter=1
 EOF
 )
 
@@ -817,9 +817,9 @@ fi
 ############################################################################
 rem_3_2_8=$(cat  <<  EOF 
 3.2.8 Đặt tham số sau và file /etc/sysctl.conf hoặc /etc/sysctl.d/*:
- net.ipv4.tcp_syncookies = 1
- Thực hiện các câu lệnh sau để đặt các tham số vào kernel đang hoạt động:
- sysctl -w net.ipv4.tcp_syncookies=1
+net.ipv4.tcp_syncookies = 1
+Thực hiện các câu lệnh sau để đặt các tham số vào kernel đang hoạt động:
+sysctl -w net.ipv4.tcp_syncookies=1
 EOF
 )
 
@@ -844,8 +844,8 @@ echo "$pass $var_3_3_3"
 ############################################################################
 rem_3_3_4=$(cat  <<  EOF 
 3.2.4 Thực hiện các câu lệnh sau để đặt các quyền ở file /etc/hosts.allow:
- chown root:root /etc/hosts.allow
- chmod 644 /etc/hosts.allow
+chown root:root /etc/hosts.allow
+chmod 644 /etc/hosts.allow
 EOF
 )
 
@@ -986,11 +986,10 @@ fi
 
 ############################################################################
 rem_4_1_1_3=$(cat  <<  EOF 
-4.1.1.3 Chỉnh sửa file /etc/rsyslog.conf và /etc/rsyslog.d/*.conf và thêm một trong các dòng sau:
+4.1.1.3 Chỉnh sửa file /etc/rsyslog.conf thêm một trong các dòng sau:
  format cũ : *.* @@<FQDN or ip of loghost>
- for file in /etc/rsyslog.d/*; do echo "*.* @@ <FQDN or ip of loghost>" >> "$file"; done
  Thực hiện câu lệnh sau để reload cấu hình của rsyslog:
- systemctl reload rsyslog
+ systemctl restart rsyslog
 EOF
 )
 
@@ -1081,8 +1080,8 @@ fi
 ############################################################################
 rem_5_1_3=$(cat  <<  EOF 
 5.1.3 Thực hiện các câu lệnh sau để đặt chủ sở hữu và quyền cho file /etc/cron_hourly:
- chown root:root /etc/cron.hourly/
- chmod og-rwx /etc/cron.hourly/
+ chown root:root /etc/cron.hourly
+ chmod og-rwx /etc/cron.hourly
 EOF
 )
 
@@ -1412,7 +1411,7 @@ rem_5_3_1=$(cat  <<  EOF
 5.3.1 Thực hiện các bước sau để cài đặt và chỉnh sửa libpam-pwquality
 apt install libpam-pwquality
  Chỉnh sửa file /etc/security/pwquality.conf để thêm hoặc cập nhật những thiết lập sau:
- minlen = 14
+ minlen = 8
  minclass = 4
  Hoặc
  dcredit = -1
@@ -1428,7 +1427,7 @@ EOF
 )
 
 var_5_3_1="5.3.1 Cấu hình điều kiện tạo mật khẩu"
-if [ $(egrep "^\s*minlen.*14|minlen.*14" /etc/security/pwquality.conf 2> /dev/null | wc -l) -eq 0 ] || [ $(egrep "^minclass.*4|^\s*minclass.*4" /etc/security/pwquality.conf 2> /dev/null | wc -l) -eq 0 ] || [ $(egrep "^enforce_for_root" /etc/security/pwquality.conf 2> /dev/null | wc -l) -eq 0 ]; then
+if [ $(egrep "^\s*minlen.*8|minlen.*8" /etc/security/pwquality.conf 2> /dev/null | wc -l) -eq 0 ] || [ $(egrep "^minclass.*4|^\s*minclass.*4" /etc/security/pwquality.conf 2> /dev/null | wc -l) -eq 0 ] || [ $(egrep "^enforce_for_root" /etc/security/pwquality.conf 2> /dev/null | wc -l) -eq 0 ]; then
 	echo "$fail $var_5_3_1"
 	echo "$rem_5_3_1" >>  $remediation_filename
 else
@@ -1686,7 +1685,7 @@ EOF
 )
 
 var_5_4_5="5.4.5 Cấu hình hạn chế truy cập cho câu lệnh su"
-if [ $( grep -E '^\s*auth\s+required\s+pam_wheel\.so\s+(\S+\s+)*use_uid\s+(\S+\s+)*group=\S+\s*(\S+\s*)*(\s+#.*)?$' /etc/pam.d/su | wc -l) -eq 0 ] || [ $( grep sugroup /etc/group | cut -d: -f4 | sed '/^[[:space:]]*$/d' | wc -l) -ne 0 ]; then
+if [ $( grep -E '^\s*auth\s+required\s+pam_wheel\.so\s+(\S+\s+)*use_uid\s+(\S+\s+)*group=\S+\s*(\S+\s*)*(\s+#.*)?$' /etc/pam.d/su | wc -l) -eq 0 ] || [ $( grep sugroup /etc/group | cut -d: -f4 | sed '/^[[:space:]]*$/d' | wc -l) -eq 0 ]; then
 	echo "$fail $var_5_4_5"
 	echo "$rem_5_4_5" >>  $remediation_filename
 else
