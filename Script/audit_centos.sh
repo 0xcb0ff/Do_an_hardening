@@ -20,8 +20,11 @@ echo "$info $var_1"
 var_1_1="1.1  Cấu hình filesystem"
 echo "$info $var_1_1"
 rem_1_1_1=$(cat  <<  EOF 
+================================================
 1.1.1->1.1.3 Chỉnh sửa file /etc/fstab thêm dòng <device> /tmp <fstype> defaults,rw,nosuid,nodev,noexec,relatime 0 0 vào cuối file
 Chạy lệnh  mount -o remount /tmp để config lại
+-----------------------------------------------
+Tác động: Tác động: Việc đặt tùy chọn này đảm bảo rằng người dùng không thể tạo thiết bị đặc biệt theo khối hoặc ký tự trong /tmp. 
 EOF
 )
 remember_1_1_1=false
@@ -59,8 +62,11 @@ fi
 
 remember_1_1_4=false
 rem_1_1_4=$(cat  <<  EOF 
+================================================
 1.1.4 - 1.1.6 Chỉnh sửa file /etc/fstab thêm dòng <device> /var/tmp <fstype> defaults,rw,nosuid,nodev,noexec,relatime 0 0 vào cuối file
 Chạy lệnh  mount -o remount /var/tmp để config lại
+-----------------------------------------------
+Tác động: Tác động: Việc đặt tùy chọn này đảm bảo rằng người dùng không thể tạo thiết bị đặc biệt theo khối hoặc ký tự trong /var/tmp.
 EOF
 )
 #########################################################################
@@ -94,8 +100,11 @@ if [ $remember_1_1_4 == true ]; then
 fi
 
 rem_1_1_7=$(cat  <<  EOF 
+================================================
 1.1.7 Chỉnh sửa file /etc/fstab thêm dòng <device> /home <fstype> defaults,rw,nodev,relatime 0 0 vào cuối file
 Chạy lệnh  mount -o remount /home để config lại
+-----------------------------------------------
+Tác động: Việc đặt tùy chọn này đảm bảo rằng người dùng không thể tạo thiết bị đặc biệt theo khối hoặc ký tự trong /home.
 EOF
 )
 #########################################################################
@@ -113,9 +122,12 @@ fi
 
 remember_1_1_8=false
 rem_1_1_8=$(cat  <<  EOF 
+================================================
 1.1.8 - 1.1.10 Phân vùng /dev/shm không được chỉ định trong file /etc/fstab, mặc dù mặc định được mount, thêm dòng sau vào cuối file /etc/fstab:
 tmpfs /dev/shm tmpfs defaults,nodev,nosuid,noexec 0 0
 Chạy lệnh  mount -o remount /dev/shm để config lại
+-----------------------------------------------
+Tác động: Việc đặt tùy chọn này đảm bảo rằng người dùng không thể tạo thiết bị đặc biệt theo khối hoặc ký tự trong /dev/shm.
 EOF
 )
 #########################################################################
@@ -148,8 +160,11 @@ if [ $remember_1_1_8 == true ]; then
 fi
 
 rem_1_1_11=$(cat  <<  EOF 
+================================================
 1.1.11 Thực hiện câu lệnh sau để đặt sticky bit cho toàn bộ thư mục dùng chung:
  df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d -perm -0002 2>/dev/null | xargs chmod a+t
+-----------------------------------------------
+Tác động: Không tác động lớn tới hệ thống.
 EOF
 )
 #########################################################################
@@ -162,9 +177,11 @@ else
 fi
 
 rem_1_1_12=$(cat  <<  EOF 
+================================================
 1.1.12 Thực hiện câu lệnh sau để vô hiệu hóa autofs:
  systemctl disable autofs
-Tác động: Việc sử dụng ổ cứng di động rất phổ biến đối với người dùng máy trạm. Nếu tổ chức cho phép sử dụng thiết bị lưu trữ di động hoặc phương tiện truyền thông trên máy trạm và các biện pháp kiểm soát truy cập vật lý đển máy trạm được coi là đủ, nếu vô hiệu hoá tính năng này có thể gây bất tiện.
+-----------------------------------------------
+Tác động: Việc sử dụng ổ đĩa cứng di động rất phổ biến đối với người dùng thông thường. Nếu tổ chức cho phép việc sử dụng lưu trữ hoặc phương tiện di động trên máy trạm, thì việc tắt autofs sẽ gây bất tiện cho người dùng.
 EOF
 )
 #########################################################################
@@ -181,6 +198,8 @@ rem_1_2_1=$(cat  <<  EOF
 1.2.1. Cấu hình kích hoạt gpgcheck
 Chỉnh sửa file cấu hình /etc/yum.config và đặt gpgcheck=1 ở mục [main].
 Chỉnh sửa bất kỳ file nào trong /etc/yum.repos.d/* trả về gpgcheck=0 và đặt tất cả các trường hợp đó thành gpgcheck=1.
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 var_1_2="1.2 Cấu hình cập nhật phần mềm"
@@ -203,6 +222,8 @@ Thực hiện câu lệnh sau và đảm bảo rằng aide được cài đặt:
 yum install aide
 aide --init
 mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+-----------------------------------------------
+Tác động: Việc theo dõi liên tục của AIDE có thể làm giảm hiệu suất hệ thống.
 EOF
 )
 if [ "$(rpm -q aide | grep "not installed" | wc -l)" -ne 0 ]; then
@@ -218,6 +239,8 @@ Thực hiện câu lệnh sau:
 crontab -u root -e
 Đặt dòng sau vào crontab:
 0 5 * * * /usr/sbin/aide --check
+-----------------------------------------------
+Tác động: Việc chạy crontab có thể gây tốn tài nguyên hệ thống.
 EOF
 )
 
@@ -233,11 +256,14 @@ var_1_4="1.4 Cấu hình khởi động an toàn"
 echo "$info $var_1_4"
 ############################################################################
 rem_1_4_1=$(cat  <<  EOF 
+================================================
 1.4.1 Thực hiện các câu lệnh sau để đặt các quyền cho file cấu hình grub:
  chown root:root /boot/grub2/grub.cfg
   test -f /boot/grub2/user.cfg && chown root:root /boot/grub2/user.cfg
  chmod og-rwx /boot/grub2/grub.cfg
  test -f /boot/grub2/user.cfg && chmod og-rwx /boot/grub2/user.cfg
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -251,8 +277,11 @@ fi
 
 ############################################################################
 rem_1_4_2=$(cat  <<  EOF 
+================================================
 1.4.2 Tạo mật khẩu được mã hóa bằng grub2-setpassword:
 grub2-setpassword
+-----------------------------------------------
+Tác động: Nếu bật tính năng bảo vệ bằng mật khẩu, chỉ người dùng có quyền được chỉ định mới có thể chỉnh sửa menu Grub 2 mục bằng cách nhấn "e" hoặc truy cập dòng lệnh GRUB 2 bằng cách nhấn "c" Nếu GRUB 2 được thiết lập để tự động khởi động vào mục menu được bảo vệ bằng mật khẩu thì người dùng có không có tùy chọn thoát khỏi lời nhắc mật khẩu để chọn mục menu khác. Giữ Phím SHIFT sẽ không hiển thị menu trong trường hợp này. Người dùng phải nhập đúng tên người dùng và mật khẩu. Nếu không thể, các tập tin cấu hình sẽ phải được chỉnh sửa qua LiveCD hoặc các phương tiện khác để khắc phục vấn đề. Có thể thêm --unrestricted vào các mục menu để cho phép hệ thống khởi động mà không cần nhập mật khẩu. Mật khẩu vẫn sẽ được yêu cầu để chỉnh sửa các mục menu.
 EOF
 )
 
@@ -267,10 +296,13 @@ fi
 
 ############################################################################
 rem_1_4_3=$(cat  <<  EOF 
+================================================
 1.4.3 Thực hiện câu lệnh sau:
 Chỉnh sửa file /usr/lib/systemd/system/rescue.service và /usr/lib/systemd/system/emergency.service và đặt ExecStart để sử dụng /sbin/sulogin hoặc /usr/sbin/sulogin:
 ExecStart=-/bin/sh -c "/sbin/sulogin; /usr/bin/systemctl --fail --no-block default"
 Tùy chọn --fail và --job-mode=fail tương đồng với nhau. Sử dụng một trong hai cái đều được
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -291,6 +323,7 @@ echo "$info $var_1_5"
 
 ############################################################################
 rem_1_5_1=$(cat  <<  EOF 
+================================================
 1.5.1 Thêm dòng sau vào file /etc/security/limits.conf hoặc file /etc/security/limits.d/*:
  * hard core 0
  Đặt các tham số sau và file /etc/sysctl.conf hoặc /etc/sysctl.d/*:
@@ -300,6 +333,8 @@ rem_1_5_1=$(cat  <<  EOF
  Nếu systemd-coredump được cài đặt, chỉnh sửa file /etc/systemd/coredump.conf và thêm/chỉnh sửa dòng sau:
  Storage=none
  ProcessSizeMax=0
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -313,10 +348,13 @@ fi
 
 ############################################################################
 rem_1_5_2=$(cat  <<  EOF 
+================================================
 1.5.2 Đặt các tham số sau vào file /etc/sysctl.conf hoặc file /etc/sysctl.d/*:
  kernel.randomize_va_space = 2
  Thực hiện câu lệnh sau để đặt tham số vào kernel đang hoạt động:
  sysctl -w kernel.randomize_va_space=2
+-----------------------------------------------
+Tác động: AppArmor phải được kích hoạt khi khởi động trong cấu hình bootloader để đảm bảo rằng các điều khiển mà nó cung cấp không bị ghi đè.
 EOF
 )
 
@@ -330,10 +368,13 @@ fi
 
 ############################################################################
 rem_1_5_3=$(cat  <<  EOF 
+================================================
 1.5.3 Thực hiện câu lệnh sau để khôi phục binaries trở về bình thường:
  prelink -ua
  Gỡ cài đặt prelink sử dụng trình quản lý package phù hợp;
  yum remove prelink
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -350,9 +391,12 @@ echo "$info $var_1_6"
 
 ############################################################################
 rem_1_6_1=$(cat  <<  EOF 
+================================================
 1.6.1 Thực hiện các câu lệnh sau để đặt quyền cho file /etc/issue
  chown root:root $(readlink -e /etc/issue)
  chmod u-x,go-wx $(readlink -e /etc/issue)
+-----------------------------------------------
+Tác động: Không ảnh hưởng tới hệ thống.
 EOF
 )
 
@@ -366,7 +410,10 @@ fi
 
 ############################################################################
 rem_1_6_2=$(cat  <<  EOF 
+================================================
 1.6.2 Chỉnh sửa file /etc/motd với nội dung phù hợp dựa theo chính sách của tổ chức, loại bỏ các trường hợp \m, \r, \s, hoặc \v.
+-----------------------------------------------
+Tác động: 
 EOF
 )
 
@@ -385,8 +432,11 @@ echo "$info $var_2_1"
 
 ############################################################################
 rem_2_1_1=$(cat  <<  EOF 
+================================================
 2.1.1 Thực hiện các câu lệnh sau để gỡ bỏ xinetd:
  yum remove xinetd
+-----------------------------------------------
+Tác động: Nếu muốn sử dụng các dịch vụ này phải cài đặt lại.
 EOF
 )
 
@@ -404,11 +454,14 @@ echo "$info $var_2_2"
 
 ############################################################################
 rem_2_2_1=$(cat  <<  EOF 
+================================================
 2.2.1 Thực hiện các câu lệnh sau
 Thêm và chỉnh sửa dòng server hoặc pool ở file /etc/chrony.conf sao cho phù hợp:
 server <remote-server>
 Thêm hoặc chỉnh sửa OPTIONS trong file /etc/sysconfig/chronyd để bao gồm ‘-u chrony’:
 OPTIONS="-u chrony"
+-----------------------------------------------
+Tác động: Nếu sử dụng chrony, ntp hoặc systemd-timesyncd sẽ không hoạt động.
 EOF
 )
 
@@ -423,6 +476,7 @@ fi
 ############################################################################
 remember_2_2_2=false
 rem_2_2_2=$(cat  <<  EOF 
+================================================
 2.2.2 - 2.2.16 Thực hiện câu lệnh sau để gỡ bỏ X window, X window, Avahi, CUPS, DHCP,LDAP, NFS, RPC, DNS , FTP, HTTP, POP3, IMAP, Samba, HTTP Proxy,SNMP, NIS :
  yum remove xorg-x11-server*
  systemctl stop avahi-daemon.socket avahi-daemon.service
@@ -442,7 +496,8 @@ rem_2_2_2=$(cat  <<  EOF
 Chạy lệnh sau để restart postfix/main
  systemctl restart postfix
  yum remove ypserv
-Tác động vô hiệu hoá X Window: Nhiều hệ thống Linux chạy các ứng dụng yêu cầu môi trường chạy Java. Một số Linux Java sử dụng các gói có sự phụ thuộc vào các phông chữ X Windows xorg-x11 cụ thể. Một cách giải quyết tránh sự phụ thuộc này là sử dụng các gói Java "headless" cho môi trường chạy Java cụ thể.
+-----------------------------------------------
+Tác động: vô hiệu hoá X Window: Nhiều hệ thống Linux chạy các ứng dụng yêu cầu môi trường chạy Java. Một số Linux Java sử dụng các gói có sự phụ thuộc vào các phông chữ X Windows xorg-x11 cụ thể. Một cách giải quyết tránh sự phụ thuộc này là sử dụng các gói Java "headless" cho môi trường chạy Java cụ thể.
 Tác động vô hiệu hoá CUPS: Loại bỏ CUPS sẽ ngăn việc in khỏi hệ thống, đây là nhiệm vụ thường gặp của máy trạm hệ thống
 EOF
 )
@@ -572,12 +627,15 @@ var_2_3_1="2.3.1 Cấu hình xoá bỏ NIS client"
 
 remember_2_3_1=false
 rem_2_3_1=$(cat  <<  EOF 
+================================================
 2.3.1 Thực hiện câu lệnh sau để gỡ cài đặt NIS client, rsh client, talk client, telnet client, LDAP client:
 yum remove ypbind
 yum remove rsh
 yum remove talk
 yum remove telnet
 yum remove openldap-clients
+Tác động: Nhiều ứng dụng khách dịch vụ không an toàn được sử dụng làm công cụ khắc phục sự cố và thử nghiệm môi trường. Việc gỡ cài đặt chúng có thể hạn chế khả năng kiểm tra và khắc phục sự cố. Nếu chúng là cần thiết thì nên loại bỏ khách hàng sau khi sử dụng để tránh vô tình hoặc cố ý lạm dụng.
+-----------------------------------------------
 Tác động: Nhiều ứng dụng khách dịch vụ không an toàn được sử dụng làm công cụ khắc phục sự cố và thử nghiệm môi trường. Việc gỡ cài đặt chúng có thể hạn chế khả năng kiểm tra và khắc phục sự cố. Nếu chúng là cần thiết thì nên loại bỏ khách hàng sau khi sử dụng để tránh vô tình hoặc cố ý lạm dụng.
 EOF
 )
@@ -635,11 +693,14 @@ echo "$info $var_3_1"
 
 var_3_1_1="3.1.1 Cấu hình vô hiệu hoá IP forwarding"
 rem_3_1_1=$(cat  <<  EOF 
+================================================
 3.1.1 Thực hiện đoạn script sau:
  grep -Els "^\s*net\.ipv4\.ip_forward\s*=\s*1" /etc/sysctl.conf /etc/sysctl.d/*.conf /usr/lib/sysctl.d/*.conf /run/sysctl.d/*.conf | while read filename; do sed -ri "s/^\s*(net\.ipv4\.ip_forward\s*)(=)(\s*\S+\b).*$/# *REMOVED* \1/" $filename; done; sysctl -w net.ipv4.ip_forward=0; sysctl -w net.ipv4.route.flush=1
  grep -Els "^\s*net\.ipv6\.conf\.all\.forwarding\s*=\s*1" /etc/sysctl.conf /etc/sysctl.d/*.conf /usr/lib/sysctl.d/*.conf /run/sysctl.d/*.conf | while read filename; do sed -ri "s/^\s*(net\.ipv6\.conf\.all\.forwarding\s*)(=)(\s*\S+\b).*$/# *REMOVED* \1/"
 $filename; done; sysctl -w net.ipv6.conf.all.forwarding=0; sysctl -w net.ipv6.route.flush=1 
 thực hiện thêm dòng net.ipv4.ip_forward=0 vào cuối file /etc/sysctl.conf
+-----------------------------------------------
+Tác động: Không ảnh hưởng tới hệ thống.
 EOF
 )
 
@@ -654,6 +715,7 @@ fi
 var_3_1_2="3.1.2 Cấu hình vô hiệu hoá tính năng chuyển hướng gói tin (packet redirect)"
 
 rem_3_1_2=$(cat  <<  EOF 
+================================================
 3.1.2 Đặt các tham số sau vào file /etc/sysctl.conf hoặc /etc/sysctl.d/*
  net.ipv4.conf.all.send_redirects = 0
  net.ipv4.conf.default.send_redirects = 0
@@ -661,6 +723,8 @@ rem_3_1_2=$(cat  <<  EOF
  sysctl -w net.ipv4.conf.all.send_redirects=0
  sysctl -w net.ipv4.conf.default.send_redirects=0
  sysctl -w net.ipv4.route.flush=1
+-----------------------------------------------
+Tác động: Không ảnh hưởng tới hệ thống.
 EOF
 )
 if [ $(sysctl net.ipv4.conf.all.send_redirects | grep "0" | wc -l) -eq 0 ] || [ $(sysctl net.ipv4.conf.default.send_redirects | grep "0" | wc -l) -eq 0 ] || [ $(grep "^net.ipv4.conf.all.send_redirects.*0" /etc/sysctl.conf /etc/sysctl.d/* | wc -l) -eq 0 ] || [ $(grep "^net.ipv4.conf.default.send_redirects.*0" /etc/sysctl.conf /etc/sysctl.d/* | wc -l) -eq 0 ]; then
@@ -676,6 +740,7 @@ echo "$info $var_3_2"
 
 var_3_2_1="3.2.1 Cấu hình từ chối các gói tin với nguồn được định tuyến trước"
 rem_3_2_1=$(cat  <<  EOF 
+================================================
 3.2.1 Đặt các thông số sau vào file /etc/sysctl.conf hoặc /etc/sysctl.d/*:
  net.ipv4.conf.all.accept_source_route = 0
  net.ipv4.conf.default.accept_source_route = 0
@@ -685,6 +750,8 @@ rem_3_2_1=$(cat  <<  EOF
  sysctl -w net.ipv4.conf.all.accept_source_route=0
  sysctl -w net.ipv4.conf.default.accept_source_route=0
  sysctl -w net.ipv4.route.flush=1
+-----------------------------------------------
+Tác động: Không ảnh hưởng tới hệ thống.
 EOF
 )
 if [ $( sysctl net.ipv4.conf.all.accept_source_route | grep net.ipv4.conf.all.accept.*0 | wc -l) -eq 0 ] || [ $( sysctl net.ipv4.conf.default.accept_source_route | grep net.ipv4.conf.default.accept.*0 | wc -l) -eq 0 ] || [ $( grep "^net.ipv4.conf.all.accept_source_route.*0" /etc/sysctl.conf /etc/sysctl.d/*  2> /dev/null | wc -l) -eq 0 ] || [ $( grep "^net.ipv4.conf.default.accept_source_route.*0" /etc/sysctl.conf /etc/sysctl.d/* 2> /dev/null | wc -l) -eq 0 ]; then
@@ -697,6 +764,7 @@ fi
 ############################################################################
 var_3_2_2="3.2.2 Cấu hình từ chối các ICMP redirect message"
 rem_3_2_2=$(cat  <<  EOF 
+================================================
 3.2.2 Đặt các tham số sau và file /etc/sysctl.conf hoặc /etc/sysctl.d/*:
  net.ipv4.conf.all.accept_redirects = 0
  net.ipv4.conf.default.accept_redirects = 0
@@ -706,6 +774,8 @@ rem_3_2_2=$(cat  <<  EOF
  sysctl -w net.ipv4.conf.all.accept_redirects=0
  sysctl -w net.ipv4.conf.default.accept_redirects=0
  sysctl -w net.ipv4.route.flush=1
+-----------------------------------------------
+Tác động: Không ảnh hưởng tới hệ thống.
 EOF
 )
 if [ $( sysctl net.ipv4.conf.all.accept_redirects | grep net.ipv4.conf.all.accept_redirects.*0 | wc -l) -eq 0 ] || [ $( sysctl net.ipv4.conf.default.accept_redirects | grep net.ipv4.conf.default.accept_redirects.*0 | wc -l) -eq 0 ] || [ $( grep "^net.ipv4.conf.all.accept_redirects.*0" /etc/sysctl.conf /etc/sysctl.d/* 2> /dev/null | wc -l) -eq 0 ] || [ $( grep "^net.ipv4.conf.default.accept_redirects.*0" /etc/sysctl.conf /etc/sysctl.d/* 2> /dev/null | wc -l) -eq 0 ]; then
@@ -717,6 +787,7 @@ fi
 
 ############################################################################
 rem_3_2_3=$(cat  <<  EOF 
+================================================
 3.2.3 Đặt các tham số sau vào file /etc/sysctl.conf hoặc /etc/sysctl.d/*:
  net.ipv4.conf.all.secure_redirects = 0
  net.ipv4.conf.default.secure_redirects = 0
@@ -724,6 +795,8 @@ rem_3_2_3=$(cat  <<  EOF
  sysctl -w net.ipv4.conf.all.secure_redirects=0
  sysctl -w net.ipv4.conf.default.secure_redirects=0
  sysctl -w net.ipv4.route.flush=1
+-----------------------------------------------
+Tác động: Không ảnh hưởng tới hệ thống.
 EOF
 )
 
@@ -737,12 +810,15 @@ fi
 
 ############################################################################
 rem_3_2_4=$(cat  <<  EOF 
+================================================
 3.2.4  Đặt các tham số sau và file /etc/sysctl.conf hoặc file /etc/sysctl.d/*:
  net.ipv4.conf.all.log_martians = 1
  net.ipv4.conf.default.log_martians = 1
  Thực hiện các câu lệnh sau để đặt các tham số vào kernel đang hoạt động:
  sysctl -w net.ipv4.conf.all.log_martians=1
  sysctl -w net.ipv4.conf.default.log_martians=1
+-----------------------------------------------
+Tác động: Không ảnh hưởng tới hệ thống.
 EOF
 )
 
@@ -756,10 +832,13 @@ fi
 
 ############################################################################
 rem_3_2_5=$(cat  <<  EOF 
+================================================
 3.2.5 Đặt tham số sau vào file /etc/sysctl.conf hoặc /etc/sysctl.d/*:
  net.ipv4.icmp_echo_ignore_broadcasts = 1
  Thực hiện các câu lệnh sau để đặt tham số vào kernel đang hoạt động:
  sysctl -w net.ipv4.icmp_echo_ignore_broadcasts=1
+-----------------------------------------------
+Tác động: Không ảnh hưởng tới hệ thống.
 EOF
 )
 
@@ -773,10 +852,13 @@ fi
 
 ############################################################################
 rem_3_2_6=$(cat  <<  EOF 
+================================================
 3.2.6 Đặt tham số sau vào file /etc/sysctl.conf hoặc /etc/sysctl.d/*:
  net.ipv4.icmp_ignore_bogus_error_responses = 1
  Thực hiện các câu lệnh sau để đặt tham số vào kernel đang hoạt động:
  sysctl -w net.ipv4.icmp_ignore_bogus_error_responses=1
+-----------------------------------------------
+Tác động: Không ảnh hưởng tới hệ thống.
 EOF
 )
 
@@ -790,12 +872,15 @@ fi
 
 ############################################################################
 rem_3_2_7=$(cat  <<  EOF 
+================================================
 3.2.7 Đặt các tham số sau vào file /etc/sysctl.conf hoặc /etc/sysctl.d/*:
  net.ipv4.conf.all.rp_filter = 1
  net.ipv4.conf.default.rp_filter = 1
  Thực hiện các câu lệnh sau để đặt các tham số vào kernel đang hoạt động:
  sysctl -w net.ipv4.conf.all.rp_filter=1
  sysctl -w net.ipv4.conf.default.rp_filter=1
+-----------------------------------------------
+Tác động: Không ảnh hưởng tới hệ thống.
 EOF
 )
 
@@ -809,10 +894,13 @@ fi
 
 ############################################################################
 rem_3_2_8=$(cat  <<  EOF 
+================================================
 3.2.8 Đặt tham số sau và file /etc/sysctl.conf hoặc /etc/sysctl.d/*:
  net.ipv4.tcp_syncookies = 1
  Thực hiện các câu lệnh sau để đặt các tham số vào kernel đang hoạt động:
  sysctl -w net.ipv4.tcp_syncookies=1
+-----------------------------------------------
+Tác động: Không ảnh hưởng tới hệ thống.
 EOF
 )
 
@@ -854,14 +942,19 @@ if [ "$(grep -E "^ALL:(\s)?192|^ALL:(\s)?172|^ALL:(\s)?10|^ALL:(\s)?170|^ALL:(\s
 else
     echo "{\"3.3.3. Cấu hình file /etc/hosts.deny\" : \"PASSED\"}"
 fi
+-----------------------------------------------
+Tác động: 
 EOF
 )
 
 ############################################################################
 rem_3_3_4=$(cat  <<  EOF 
+================================================
 3.2.4 Thực hiện các câu lệnh sau để đặt các quyền ở file /etc/hosts.allow:
  chown root:root /etc/hosts.allow
  chmod 644 /etc/hosts.allow
+-----------------------------------------------
+Tác động: Không ảnh hưởng tới hệ thống.
 EOF
 )
 
@@ -875,9 +968,12 @@ fi
 
 ############################################################################
 rem_3_3_5=$(cat  <<  EOF 
+================================================
 3.2.5 Thực hiện các câu lệnh sau để đặt các quyền ở file /etc/hosts.deny:
  chown root:root /etc/hosts.deny
  chmod 644 /etc/hosts.deny
+-----------------------------------------------
+Tác động: Không ảnh hưởng tới hệ thống.
 EOF
 )
 
@@ -895,8 +991,11 @@ echo "$info $var_3_4"
 
 var_3_4_1="3.4.1 Bật Iptables"
 rem_3_4_1=$(cat  <<  EOF 
+================================================
 3.4.1 Thực hiện câu lệnh sau để cài đặt iptables:
 yum install iptables
+-----------------------------------------------
+Tác động: Không ảnh hưởng tới hệ thống.
 EOF
 )
 
@@ -909,10 +1008,13 @@ fi
 
 ############################################################################
 rem_3_4_2=$(cat  <<  EOF 
+================================================
 3.4.2 Thực hiện các câu lệnh sau để cài đặt chính sách mặc định là DROP:
  iptables -P INPUT DROP
  iptables -P OUTPUT DROP
  iptables -P FORWARD DROP
+-----------------------------------------------
+Tác động: Quá trình này có thể ngắt kết nối qua mạng, phải thiết lập kết nối trên các cổng trước khi thiết lập các rule trên.
 EOF
 )
 
@@ -926,10 +1028,13 @@ fi
 
 ############################################################################
 rem_3_4_3=$(cat  <<  EOF 
+================================================
 3.4.3 Thực hiện các câu lệnh sau để cài đặt các luật cho đường truyền loopback:
  iptables -A INPUT -i lo -j ACCEPT
  iptables -A OUTPUT -o lo -j ACCEPT
  iptables -A INPUT -s 127_0_0_0/8 -j DROP
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -943,8 +1048,11 @@ fi
 
 ############################################################################
 rem_3_4_4=$(cat  <<  EOF 
+================================================
 3.4.4 Với mỗi cổng được xác định ở bước kiểm tra mà không có luật tường lửa nào, thiết lập luật phù hợp để chấp nhận kết nối đến:
  iptables -A INPUT -p --dport -m state --state NEW -j ACCEPT
+-----------------------------------------------
+Tác động: Nếu không cấu hình chính sách từ chối đã cấu hình ở mục 3.4.2 sẽ tự động từ chối tất cả các gói tin tới.
 EOF
 )
 
@@ -966,25 +1074,13 @@ echo "$info $var_4_1_1"
 
 var_4_1_1_1="4.1.1.1 Cấu hình kích hoạt rsyslog service"
 rem_4_1_1_1=$(cat  <<  EOF 
+================================================
 4.1.1.1 Thực hiện câu lệnh sau để kích hoạt rsyslog:
  systemctl --now enable rsyslog
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
-if [ $( systemctl is-enabled rsyslog 2> /dev/null | grep enabled | wc -l) -eq 0 ]; then
-	echo "$fail $var_4_1_1_1"
-	echo "$rem_4_1_1_1" >>  $remediation_filename
-else
-	echo "$pass $var_4_1_1_1"  
-fi
-
-############################################################################
-rem_4_1_1_1=$(cat  <<  EOF 
-4.1.1.1 Thực hiện câu lệnh sau để kích hoạt rsyslog:
- systemctl --now enable rsyslog
-EOF
-)
-
-var_4_1_1_1="4.1.1.1 Cấu hình kích hoạt rsyslog service"
 if [ $( systemctl is-enabled rsyslog 2> /dev/null | grep enabled | wc -l) -eq 0 ]; then
 	echo "$fail $var_4_1_1_1"
 	echo "$rem_4_1_1_1" >>  $remediation_filename
@@ -994,9 +1090,12 @@ fi
 
 ############################################################################
 rem_4_1_1_2=$(cat  <<  EOF 
+================================================
 4.1.1.2 Chỉnh sửa file /etc/rsyslog.conf và /etc/rsyslog.d/*.conf và đặt:
  $FileCreateMode là 0640 hoặc nghiêm ngặt hơn:
  Đảm bảo cấu hình này không bị viết đè bởi các thiết lập kém nghiêm ngặt hơn ở bất kỳ file conf nào trong /etc/rsyslog.d/*.
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1010,11 +1109,14 @@ fi
 
 ############################################################################
 rem_4_1_1_3=$(cat  <<  EOF 
+================================================
 4.1.1.3 Chỉnh sửa file /etc/rsyslog.conf và /etc/rsyslog.d/*.conf và thêm một trong các dòng sau:
  format cũ : *.* @@<FQDN or ip of loghost>
  for file in /etc/rsyslog.d/*; do echo "*.* @@ <FQDN or ip of loghost>" >> "$file"; done
  Thực hiện câu lệnh sau để reload cấu hình của rsyslog:
  systemctl reload rsyslog
+-----------------------------------------------
+Tác động: Nếu không cấu hình log sẽ không được gửi đến máy chủ tập trung.
 EOF
 )
 
@@ -1039,8 +1141,11 @@ echo "$pass $var_4_1_2_3"
 ############################################################################
 var_4_1_3="4.1.3 Đảm bảo rsyslog hoặc syslog-ng được cài đặt"
 rem_4_1_3=$(cat  <<  EOF 
+================================================
 4.1.3 Cài đặt rsyslog hoặc syslog-ng sử dụng một trong những câu lệnh sau:
   apt install rsyslog
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1054,8 +1159,11 @@ fi
 ############################################################################
 var_4_1_4="4.1.4 Phân quyền đối với tất cả các file log"
 rem_4_1_4=$(cat  <<  EOF 
+================================================
 4.1.4 Thực hiện câu lệnh sau để đặt quyền cho toàn bộ file log:
  find /var/log -type f -exec chmod g-wx,o-rwx {} +
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 if [ $(find /var/log -type f -perm /g+wx,o+rwx -ls 2> /dev/null | wc -l) -gt 0 ]; then
@@ -1072,8 +1180,11 @@ echo "$info $var_5"
 echo "$info $var_5_1"
 var_5_1_1="5.1.1 Cấu hình kích hoạt cron daemon"
 rem_5_1_1=$(cat  <<  EOF 
+================================================
 5.1.1 Thực hiện câu lệnh sau để kích hoạt cron:
  systemctl --now enable crond
+-----------------------------------------------
+Tác động: Nếu cron được kích hoạt phải tắt các dịch vụ tương tự khách như systemd timers
 EOF
 )
 
@@ -1087,9 +1198,12 @@ fi
 ############################################################################
 var_5_1_2="5.1.2 Cấu hình phân quyền cho file /etc/crontab"
 rem_5_1_2=$(cat  <<  EOF 
+================================================
 5.1.2 Thực hiện các câu lệnh sau để đảm bảo rằng để đặt chủ sở hữu và quyền cho file /etc/crontab:
  chown root:root /etc/crontab
  chmod og-rwx /etc/crontab
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 if [ $( stat /etc/crontab 2> /dev/null | grep "0600.*Uid.*root.*Gid.*root" | wc -l) -eq 0 ]; then
@@ -1101,9 +1215,12 @@ fi
 
 ############################################################################
 rem_5_1_3=$(cat  <<  EOF 
+================================================
 5.1.3 Thực hiện các câu lệnh sau để đặt chủ sở hữu và quyền cho file /etc/cron_hourly:
  chown root:root /etc/cron.hourly/
  chmod og-rwx /etc/cron.hourly/
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1117,9 +1234,12 @@ fi
 
 ############################################################################
 rem_5_1_4=$(cat  <<  EOF 
+================================================
 5.1.4 Thực hiện các câu lệnh sau và đặt chủ sở hữu và quyền cho file /etc/cron_daily:
  chown root:root /etc/cron.daily
  chmod og-rwx /etc/cron.daily
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1133,9 +1253,12 @@ fi
 
 ############################################################################
 rem_5_1_5=$(cat  <<  EOF 
+================================================
 5.1.5 Thực hiện các câu lệnh sau để đặt chủ sở hữu và quyền cho file /etc/cron_weekly:
  chown root:root /etc/cron.weekly
  chmod og-rwx /etc/cron.weekly
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1149,9 +1272,12 @@ fi
 
 ############################################################################
 rem_5_1_6=$(cat  <<  EOF 
+================================================
 5.1.6 Thực hiện các câu lệnh sau để đặt chủ sở hữu và quyền cho file /etc/cron.monthly:
  chown root:root /etc/cron.monthly
  chmod og-rwx /etc/cron.monthly
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1165,9 +1291,12 @@ fi
 
 ############################################################################
 rem_5_1_7=$(cat  <<  EOF 
+================================================
 5.1.7 Thực hiện câu lệnh sau để đặt chủ sở hữu và quyền cho file /etc/cron.d:
  chown root:root /etc/cron.d
  chmod og-rwx /etc/cron.d
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1182,11 +1311,14 @@ fi
 ############################################################################
 var_5_1_8="5.1.8 Cấu hình at/cron hạn chế chỉ cho người dùng được ủy quyền"
 rem_5_1_8=$(cat  <<  EOF 
+================================================
 5.1.8 Thực hiện các câu lệnh sau:
  rm /etc/cron.deny
  touch /etc/cron.allow
  chmod g-wx,o-rwx /etc/cron.allow
  chown root:root /etc/cron.allow
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 if [ $(stat /etc/cron.allow 2> /dev/null | grep "0640.*Uid.*root.*Gid.*root" | wc -l) -eq 0 ] || [ $(stat /etc/cron.deny 2>/dev/null | wc -l) -ne 0 ];then
@@ -1206,9 +1338,12 @@ echo "$info $var_5_2"
 
 ############################################################################
 rem_5_2_1=$(cat  <<  EOF 
+================================================
 5.2.1 Thực hiện các câu lệnh sau để đặt chủ sở hữu và quyền cho file /etc/ssh/sshd_config:
  chown root:root /etc/ssh/sshd_config
  chmod og-rwx /etc/ssh/sshd_config
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1222,10 +1357,13 @@ fi
 
 ############################################################################
 rem_5_2_2=$(cat  <<  EOF 
+================================================
 5.2.2 Chỉnh sửa file /etc/ssh/sshd_config và thêm tham số như sau:
  LogLevel INFO
  Hoặc
  LogLevel VERBOSE
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1239,9 +1377,12 @@ fi
 
 ############################################################################
 rem_5_2_3=$(cat  <<  EOF 
+================================================
 5.2.3 Chỉnh sửa file /etc/ssh/sshd_config và đặt tham số như sau:
  X11Forwarding no
 Các chương trình X11 trên máy chủ sẽ không thể được chuyển tiếp tới màn hình ssh-client.
+-----------------------------------------------
+Tác động: Các chương trình X11 trên máy chủ sẽ không thể được chuyển tiếp tới màn hình ssh-client.
 EOF
 )
 
@@ -1255,8 +1396,11 @@ fi
 
 ############################################################################
 rem_5_2_4=$(cat  <<  EOF 
+================================================
 5.2.4 Chỉnh sửa file /etc/ssh/sshd_config và đặt tham số như sau:
  MaxAuthTries 4
+-----------------------------------------------
+Tác động: Kẻ xấu có thể lợi dụng điều này gây nên một cuộc tấn công từ chối dịch vụ bằng các thử sai nhiều lần.
 EOF
 )
 
@@ -1270,8 +1414,11 @@ fi
 
 ############################################################################
 rem_5_2_5=$(cat  <<  EOF 
+================================================
 5.2.5 Chỉnh sửa file /etc/ssh/sshd_config và đặt tham số như sau:
  IgnoreRhosts yes
+-----------------------------------------------
+Tác động: Người dùng bắt buộc phải nhập mật khẩu khi xác thực với ssh.
 EOF
 )
 
@@ -1285,8 +1432,11 @@ fi
 
 ############################################################################
 rem_5_2_6=$(cat  <<  EOF 
+================================================
 5.2.6 Chỉnh sửa file /etc/ssh/sshd_config và đặt tham số như sau:
  HostbasedAuthentication no
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1300,8 +1450,11 @@ fi
 
 ############################################################################
 rem_5_2_7=$(cat  <<  EOF 
+================================================
 5.2.7 Chỉnh sửa file /etc/ssh/sshd_config và đặt tham số như sau:
 PermitRootLogin no
+-----------------------------------------------
+Tác động: Không thể đăng nhập bằng tài khoản root.
 EOF
 )
 
@@ -1315,8 +1468,11 @@ fi
 
 ############################################################################
 rem_5_2_8=$(cat  <<  EOF 
+================================================
 5.2.8 Chỉnh sửa file /etc/ssh/sshd_config và đặt tham số như sau:
  PermitEmptyPasswords no
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1330,8 +1486,11 @@ fi
 
 ############################################################################
 rem_5_2_9=$(cat  <<  EOF 
+================================================
 5.2.9 Chỉnh sửa file /etc/ssh/sshd_config và đặt tham số như sau:
  PermitUserEnvironment no
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1345,9 +1504,12 @@ fi
 
 ############################################################################
 rem_5_2_10=$(cat  <<  EOF 
+================================================
 5.2.10 Chỉnh sửa file /etc/ssh/sshd_config và thêm/thay đổi dòng MACs để chứa danh sách MAC được chấp thuận:
  Ví dụ:
  MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512,hmac-sha2-256
+-----------------------------------------------
+Tác động: Không thể sử dụng được các loại mã hoá yếu.
 EOF
 )
 
@@ -1361,9 +1523,12 @@ fi
 
 ############################################################################
 rem_5_2_11=$(cat  <<  EOF 
+================================================
 5.2.11 Chỉnh sửa file /etc/ssh/sshd_config và đặt tham số như sau:
  ClientAliveInterval 300
  ClientAliveCountMax 0
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1377,8 +1542,11 @@ fi
 
 ############################################################################
 rem_5_2_12=$(cat  <<  EOF 
+================================================
 5.2.12 Chỉnh sửa file /etc/ssh/sshd_config và đặt tham số như sau:
  LoginGraceTime 60
+-----------------------------------------------
+Tác động: Nếu người dùng không đăng nhập trong 60s phiên đăng nhập sẽ kết thúc.
 EOF
 )
 
@@ -1392,11 +1560,17 @@ fi
 
 ############################################################################
 rem_5_2_13=$(cat  <<  EOF 
+================================================
 5.2.13 Chỉnh sửa file /etc/ssh/sshd_config và đặt tham số như sau:
  AllowUsers <list of users>
+ hoặc
  AllowGroups <list of groups>
+ hoặc
  DenyUsers <list of users>
+ hoặc
  DenyGroups <list of groups>
+-----------------------------------------------
+Tác động: Chỉ cho phép các user có trong AllowUsers và AllowGroups mới được phép đăng nhập.
 EOF
 )
 
@@ -1410,8 +1584,11 @@ fi
 
 ############################################################################
 rem_5_2_14=$(cat  <<  EOF 
+================================================
 5.2.14 Chỉnh sửa file /etc/ssh/sshd_config và đặt tham số như sau:
  Banner /etc/issue.net
+-----------------------------------------------
+Tác động: Tác động: Nội dung trong /etc/issue.net cần được đảm bảo không chứa thông tin nhạy cảm.
 EOF
 )
 
@@ -1429,15 +1606,20 @@ echo "$info $var_5_3"
 
 ############################################################################
 rem_5_3_1=$(cat  <<  EOF 
+================================================
 5.3.1 Thực hiện các bước sau để cài đặt và chỉnh sửa libpam-pwquality
  Chỉnh sửa file /etc/security/pwquality.conf để thêm hoặc cập nhật những thiết lập sau:
  minlen = 14
+ 
  minclass = 4
+ hoặc 
  dcredit = -1
  ucredit = -1
  ocredit = -1
  lcredit = -1
  Các thiết lập trong file /etc/security/pwquality.conf phải sử dụng dấu cách xung quanh dấu “=”.
+-----------------------------------------------
+Tác động: Việc thiết lập điều kiện tạo mật khẩu quá khó có thể khiến cho người dùng dễ quên mật khẩu, tăng lượng công việc cho đội ngũ quản trị.
 EOF
 )
 
@@ -1451,6 +1633,7 @@ fi
 
 ############################################################################
 rem_5_3_2=$(cat  <<  EOF 
+================================================
 5.3.2 Chỉnh sửa file /etc/pam.d/system-auth và file /etc/pam.d/password-auth  
 Chỉnh sửa tham số deny=5 và unlock_time=900 theo mẫu dưới đây:
 Đối với phần auth:
@@ -1467,6 +1650,8 @@ account sufficient pam_localuser.so
 account sufficient pam_pam_succeed_if.so uid < 1000 quiet
 account required pam_permit.so
 
+-----------------------------------------------
+Tác động: Kẻ tấn công có thể lợi dụng điều này gây nên một cuộc tấn công dos.
 EOF
 )
 
@@ -1480,11 +1665,14 @@ fi
 
 ############################################################################
 rem_5_3_3=$(cat  <<  EOF 
+================================================
 5.3.3 Chỉnh sửa file /etc/pam.d/password-auth và /etc/pam.d/system-auth để bao gồm tùy chọn remember và tuân thủ theo chính sách của tổ chức theo mẫu sau:
 password requisite pam_pwquality.so try_first_pass local_users_only authtok_type=
 password required pam_pwhistory.so use_authtok remember=5 retry=3
 password sufficient pam_unix.so sha512 shadow nullok try_first_pass use_authtok
 password required pam_deny.so
+-----------------------------------------------
+Tác động: Việc giới hạn sử dụng lại mật khẩu có thể khiến cho người dùng đặt các mật khẩu dễ đoán như mật khẩu cũ là Admin1 thì mật khẩu mới sẽ là Admin2.
 EOF
 )
 
@@ -1498,8 +1686,11 @@ fi
 
 ############################################################################
 rem_5_3_4=$(cat  <<  EOF 
+================================================
 5.3.4 Chỉnh sửa file /etc/pam.d/password-auth và /etc/pam.d/system-auth để có tùy chọn sha512 cho pam_unix.so như dưới đây:
 password sufficient pam_unix.so sha512
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1519,10 +1710,13 @@ echo "$info $var_5_4_1"
 
 ############################################################################
 rem_5_4_1_1=$(cat  <<  EOF 
+================================================
 5.4.1.1 Đặt tham số PASS_MAX_DAYS trong file /etc/login.defs tuân theo chính sách của tổ chức:
  PASS_MAX_DAYS 90
  Chỉnh sửa tham số cho người dùng sử dụng mật khẩu bằng câu lệnh sau:
  chage --maxdays 90
+-----------------------------------------------
+Tác động: Đối với các tài khoản đặc biệt phải cấu hình ngoại lệ với mục này.
 EOF
 )
 
@@ -1542,10 +1736,13 @@ fi
 
 ############################################################################
 rem_5_4_1_2=$(cat  <<  EOF 
+================================================
 5.4.1.2 Đặt tham số PASS_MIIN_DAYS trong file /etc/login.defs là 7:
  PASS_MIN_DAYS 7
  Chỉnh sửa tham số cho người dùng sử dụng mật khẩu bằng câu lệnh sau:
  chage --mindays 7
+-----------------------------------------------
+Tác động: Đối với các tài khoản đặc biệt phải cấu hình ngoại lệ với mục này.
 EOF
 )
 
@@ -1565,11 +1762,14 @@ fi
 
 ############################################################################
 rem_5_4_1_3=$(cat  <<  EOF 
+================================================
 5.4.1.3 Đặt tham số PASS_WARN_AGE trong file /etc/login.defs là 7:
  PASS_WARN_AGE 7
  Chỉnh sửa tham số của người dùng sử dụng mật khẩu bằng câu lệnh sau:
  chage --warndays 7
  warndays 7
+-----------------------------------------------
+Tác động: Đối với các tài khoản đặc biệt phải cấu hình ngoại lệ với mục này.
 EOF
 )
 
@@ -1589,10 +1789,13 @@ fi
 
 ############################################################################
 rem_5_4_1_4=$(cat  <<  EOF 
+================================================
 5.4.1.4 Thực hiện câu lệnh sau dể đặt khoảng thời gian tài khoản không hoạt động là 30 ngày:
  useradd -D -f 30
  Chỉnh sửa thông số của người dùng sử dụng mật khẩu bằng câu lệnh sau:
  chage --inactive 30 <user>
+-----------------------------------------------
+Tác động: Đối với các tài khoản đặc biệt phải cấu hình ngoại lệ với mục này.
 EOF
 )
 
@@ -1610,6 +1813,7 @@ fi
 
 ############################################################################
 rem_5_4_2=$(cat  <<  EOF 
+================================================
  Đặt shell cho những tài khoản được trả về bởi script trên phần Kiểm tra sang /sbin/nologin:
  usermod -s /sbin/nologin <user>
  Script dưới đây sẽ tự động đặt toàn bộ các shell người dùng cần thiết sang /sbin/nologin và khóa các người dùng sync, shutdown, và halt:
@@ -1621,6 +1825,8 @@ rem_5_4_2=$(cat  <<  EOF
          fi
      fi
  done
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1634,8 +1840,11 @@ fi
 
 ############################################################################
 rem_5_4_3=$(cat  <<  EOF 
+================================================
 5.4.3 Thực hiện câu lệnh sau để đặt group mặc định cho người dùng root là GID 0:
  usermod -g 0 root
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống, tuy nhiên cần đảm bảo không grouper nào khác có GID là 0.
 EOF
 )
 
@@ -1649,12 +1858,15 @@ fi
 
 ############################################################################
 rem_5_4_4=$(cat  <<  EOF 
+================================================
 5.4.4 Chỉnh sửa file /etc/bash.bashrc, /etc/profile và /etc/profile.d/*.sh, thêm vào hoặc chỉnh sửa tất cả các tham số umask như sau:
  umask 027
  for file in /etc/profile.d/*.sh; do echo "umask 027" >> "$file"; done
  echo "umask 027" >> /etc/bash.bashrc
  echo "umask 027" >> /etc/profile
-Tác động: Việc đặt USERGROUPS_ENAB no trong /etc/login.defs có thể thay đổi hành vi dự kiến của useradd và userdel.
+-----------------------------------------------
+Tác động: Tác động: Việc đặt USERGROUPS_ENAB no trong /etc/login.defs có thể thay đổi hành vi dự kiến của useradd và userdel.
+Ghi chú: Phương pháp này chỉ áp dụng cho bash và shell. Nếu có hỗ trợ các shell khác trên hệ thống, nên kiểm tra cấu hình của chúng nữa.
 EOF
 )
 
@@ -1680,10 +1892,13 @@ fi
 
 ############################################################################
 rem_5_4_5=$(cat  <<  EOF 
+================================================
 5.4.5 Tạo ra một nhóm rỗng sẽ được chỉ định để sử dụng trong lệnh su. Tên nhóm nên được đặt tên theo chính sách:
  groupadd sugroup
  Thêm dòng sau vào file /etc/pam.d/su, chỉ định nhóm rỗng vừa tạo vào:
  auth required pam_wheel.so use_uid group=sugroup
+-----------------------------------------------
+Tác động: user không nằm trong nhóm sugroup sẽ không thể thực hiện câu lệnh su.
 EOF
 )
 
@@ -1704,6 +1919,7 @@ echo "$info $var_6_1"
 remember_6_1_1=false
 ############################################################################
 rem_6_1_1=$(cat  <<  EOF 
+================================================
 6.1.1 - 6.1.8 Thực hiện các câu lệnh sau để đặt quyền ở file /etc/passwd:
  chown root:root /etc/passwd
  chmod 644 /etc/passwd
@@ -1721,6 +1937,8 @@ rem_6_1_1=$(cat  <<  EOF
  chmod 644 /etc/group-
  chown root:root /etc/gshadow-
  chmod 0000 /etc/gshadow-
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1814,7 +2032,10 @@ fi
 
 ############################################################################
 rem_6_1_9=$(cat  <<  EOF 
+================================================
 6.1.9 Bạn nên xóa quyền ghi cho danh mục "other" (chmod o-w <tên tệp>), nhưng luôn tham khảo tài liệu của nhà cung cấp có liên quan để tránh phá vỡ bất kỳ phụ thuộc ứng dụng nào trên một tệp nhất định.
+-----------------------------------------------
+Tác động: Nên thao khảo tài liệu cung cấp liên quan để tránh phá vỡ sự phụ thuộc trên một tệp nhất định.
 EOF
 )
 
@@ -1828,7 +2049,10 @@ fi
 
 ###########################################################################
 rem_6_1_10=$(cat  <<  EOF 
+================================================
 6.1.10 Xác định các file và thư mục được sở hữu bởi người dùng hoặc group không được liệt kê trong file cấu hình hệ thống, và reset quyền sở hữu của những file này cho những người dùng đang hoạt động khác trên hệ thống sao cho phù hợp.
+-----------------------------------------------
+Tác động: Nếu không xoá các file này một người dùng mới tạo có thể trùng id với id người dùng đã sở hữu những file này.
 EOF
 )
 
@@ -1848,7 +2072,10 @@ fi
 
 ############################################################################
 rem_6_1_11=$(cat  <<  EOF 
+================================================
 6.1.11 Xác định các file và thư mục được sở hữu bởi người dùng hoặc group không được liệt kê trong file cấu hình hệ thống, và reset quyền sở hữu của những file này cho những người dùng đang hoạt động khác trên hệ thống sao cho phù hợp.
+-----------------------------------------------
+Tác động: Nếu không xoá các file này một nhóm mới tạo có thể trùng id với id nhóm đã sở hữu những file này.
 EOF
 )
 
@@ -1872,9 +2099,12 @@ echo "$info $var_6_2"
 
 ############################################################################
 rem_6_2_1=$(cat  <<  EOF 
+================================================
 6.2.1 Nếu có tài khoản nào trong file /etc/shadow không có mật khẩu, thực hiện câu lệnh sau để khóa tài khoản đến khi xác định được nguyên nhân tài khoản đó không có mật khẩu:
  passwd -l <username>
  Đồng thời, kiểm tra tài khoản đó được đăng nhập hay chưa và tìm hiểu xem tài khoản đó được sử dụng với mục đích gì để nếu nó cần phải bị xóa.
+-----------------------------------------------
+Tác động: Cần phải đặt ngoại lệ cho các tài khoản đặc biệt trên hệ thống.
 EOF
 )
 
@@ -1888,7 +2118,10 @@ fi
 
 ############################################################################
 rem_6_2_2=$(cat  <<  EOF 
+================================================
 6.2.2 Loại bỏ bất kỳ bản ghi có dấu “+” trong file /etc/passwd
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1902,7 +2135,10 @@ fi
 
 ############################################################################
 rem_6_2_3=$(cat  <<  EOF 
+================================================
 6.2.3 Loại bỏ bất kỳ bản ghi nào có dấu “+” trong file /etc/shadow
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1916,7 +2152,10 @@ fi
 
 ############################################################################
 rem_6_2_4=$(cat  <<  EOF 
+================================================
 6.2.4 Loại bỏ bất kỳ bản ghi nào có dấu “+” trong file /etc/group
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -1931,7 +2170,10 @@ fi
 ############################################################################
 var_6_2_5="6.2.5 Đảm bảo root là tài khoản duy nhất có UID là 0"
 rem_6_2_5=$(cat  <<  EOF 
+================================================
 6.2.5 Loại bỏ bất kỳ user nào ngoài root có UID là 0 hoặc chỉ định chúng một UID mới, phù hợp với chính sách của tổ chức.
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 if [ "$( cat /etc/passwd | awk -F: '$3==0 {print $1}')" != 'root' ]; then
@@ -1944,7 +2186,10 @@ fi
 ############################################################################
 var_6_2_6="6.2.6 Đảm bảo người dùng sở hữu thư mục home của chính họ"
 rem_6_2_6=$(cat  <<  EOF 
+================================================
 6.2.6 Đảm bảo người dùng sở hữu thư mục home của chính họ.
+-----------------------------------------------
+Tác động: Nếu không tạo rất có thể người dùng đó sẽ không có quyền gì trên hệ thống.
 EOF
 )
 # Đảm bảo tính toàn vẹn cho biến môi trường PATH của root.
@@ -1983,7 +2228,10 @@ fi
 
 ############################################################################
 rem_6_2_7=$(cat  <<  EOF 
+================================================
 6.2.7 Nếu bất kỳ người dùng nào không có thư mục home, hãy tạo và đảm bảo người dùng tương ứng sở hữu thư mục đó. Những người dùng không có thư mục home nên bị xóa hoặc chỉ định họ một thư mục home phù hợp.
+-----------------------------------------------
+Tác động: Nếu không tạo rất có thể người dùng đó sẽ không có quyền gì trên hệ thống.
 EOF
 )
 
@@ -2004,7 +2252,10 @@ fi
 
 ############################################################################
 rem_6_2_8=$(cat  <<  EOF 
+================================================
 6.2.8 Thực hiện các sửa đổi toàn cầu đối với thư mục /home của người dùng mà không thông báo cho cộng đồng người dùng có thể dẫn đến sự cố không mong muốn và người dùng không hài lòng. Do đó, bạn nên thiết lập chính sách giám sát để báo cáo quyền đối với tệp người dùng và xác định hành động cần thực hiện theo chính sách tổ chức.
+-----------------------------------------------
+Tác động: Nếu người dùng muốn cho người dùng khác truy cập vào thư mục home của chính mình cần phải thay đổi quyền sao cho phù hợp với yêu cầu của tổ chức.
 EOF
 )
 
@@ -2024,6 +2275,7 @@ fi
 
 ############################################################################
 rem_6_2_9=$(cat  <<  EOF 
+================================================
 6.2.9 Thay đổi quyền sở hữu của bất kỳ thư mục home nào không được sở hữu bởi người dùng được định danh sang đúng người dùng.
 Thực hiện đoạn script sau để tự động cấu hình
 #!/bin/bash
@@ -2041,6 +2293,8 @@ awk -F: '($1!~/(halt|sync|shutdown|nfsnobody)/ && $7!~/^(\/usr)?\/sbin\/nologin(
  fi
  fi
 done
+-----------------------------------------------
+Tác động: Nếu người dùng không sử dụng thư mục home của chính họ sẽ dấn đến việc cài đặt các quyền trong thư mục home không được thực hiện.
 EOF
 )
 
@@ -2069,7 +2323,10 @@ fi
 
 ############################################################################
 rem_6_2_10=$(cat  <<  EOF 
+================================================
 6.2.10 Việc chỉnh sửa toàn cục cho thư mục của người dùng mà không báo trước có thể khiến người dùng không hài lòng. Bởi vậy, khuyến nghị tạo nên một chính sách theo dõi để báo cáo quyền file dot của người dùng và xác định hành động nên làm theo chính sách.
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -2083,7 +2340,10 @@ fi
 
 ############################################################################
 rem_6_2_11=$(cat  <<  EOF 
+================================================
 6.2.11 Việc chỉnh sửa toàn cục cho thư mục của người dùng mà không báo trước có thể khiến người dùng không hài lòng. Bởi vậy, khuyến nghị tạo nên một chính sách theo dõi để báo cáo file .forward của người dùng và xác định hành động nên làm theo chính sách.
+-----------------------------------------------
+Tác động: Nếu có ngoại lệ phải được thêm vào trường hợp ngoại lệ.
 EOF
 )
 
@@ -2097,7 +2357,10 @@ fi
 
 ############################################################################
 rem_6_2_12=$(cat  <<  EOF 
+================================================
 6.2.12 Việc chỉnh sửa toàn cục cho thư mục của người dùng mà không báo trước có thể khiến người dùng không hài lòng_ Bởi vậy, khuyến nghị tạo nên một chính sách theo dõi để báo cáo file .netrc của người dùng và xác định hành động nên làm theo chính sách.
+-----------------------------------------------
+Tác động: Nếu có ngoại lệ phải được thêm vào trường hợp ngoại lệ.
 EOF
 )
 
@@ -2111,7 +2374,10 @@ fi
 
 ############################################################################
 rem_6_2_13=$(cat  <<  EOF 
+================================================
 6.2.13 Việc chỉnh sửa toàn cục cho thư mục của người dùng mà không báo trước có thể khiến người dùng không hài lòng. Bởi vậy, khuyến nghị tạo nên một chính sách theo dõi để báo cáo file .netrc của người dùng và xác định hành động nên làm theo chính sách.
+-----------------------------------------------
+Tác động: Nếu có ngoại lệ phải được thêm vào trường hợp ngoại lệ.
 EOF
 )
 
@@ -2125,7 +2391,10 @@ fi
 
 ############################################################################
 rem_6_2_14=$(cat  <<  EOF 
+================================================
 6.2.14 Việc chỉnh sửa toàn cục cho thư mục của người dùng mà không báo trước có thể khiến người dùng không hài lòng. Bởi vậy, khuyến nghị tạo nên một chính sách theo dõi để báo cáo file .rhost của người dùng và xác định hành động nên làm theo chính sách.
+-----------------------------------------------
+Tác động: Nếu có ngoại lệ phải được thêm vào trường hợp ngoại lệ.
 EOF
 )
 
@@ -2139,7 +2408,10 @@ fi
 
 ############################################################################
 rem_6_2_15=$(cat  <<  EOF 
+================================================
 6.2.15 Phân tích kết quả trả về ở phần Kiểm tra phía trên và thực hiện hành động phù hợp để chỉnh sửa bất kỳ khác biệt nào tìm thấy được.
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -2159,7 +2431,10 @@ fi
 
 ############################################################################
 rem_6_2_16=$(cat  <<  EOF 
+================================================
 6.2.16 Dựa theo kết quả từ phần Kiểm tra, tạo ra một UID độc nhất và kiểm tra toàn bộ file sở hữu bởi UID bị trùng để xác định các file đó thuộc về UID nào.
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -2173,8 +2448,11 @@ fi
 
 ############################################################################
 rem_6_2_17=$(cat  <<  EOF 
+================================================
 6.2.17 Dựa theo kết quả từ phần Kiểm tra, tạo ra một GID độc nhất và kiểm tra toàn bộ file sở hữu bởi GID bị trùng để xác định các file đó thuộc về GID nào.
  Có thể sử dụng lệnh grpck để kiểm tra các mâu thuẫn khác trong file /etc/group.
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -2188,7 +2466,10 @@ fi
 
 ############################################################################
 rem_6_2_18=$(cat  <<  EOF 
+================================================
 6.2.18 Dựa theo kết quả ở phần Kiểm tra, tạo ra một tên người dùng độc nhất cho người dùng. Quyền sở hữu của người dùng ở file sẽ tự động cập nhật thay đổi nếu người dùng có UID độc nhất.
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
@@ -2202,7 +2483,10 @@ fi
 
 ############################################################################
 rem_6_2_19=$(cat  <<  EOF 
+================================================
 6.2.19 Dựa theo kết quả ở phần Kiểm tra, tạo ra một tên group độc nhất cho người dùng. Quyền sở hữu của group ở file sẽ tự động cập nhật thay đổi nếu group có GID độc nhất.
+-----------------------------------------------
+Tác động: Không tác động tới hệ thống.
 EOF
 )
 
