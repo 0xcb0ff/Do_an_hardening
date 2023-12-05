@@ -1339,11 +1339,7 @@ Try {
     Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-    $path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+    $path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
     $unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" | select-string 'NoConnectedUser' 2> $null |  Measure-Object | % { $_.Count })
     $output1 = '0x3'
     if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -1405,11 +1401,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\System\Currentcontrolset\Control\Lsa' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\Currentcontrolset\Control\Lsa
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\Currentcontrolset\Control\Lsa")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\System\Currentcontrolset\Control\Lsa" 2> $null | select-string 'LimitBlankPasswordUse' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\System\Currentcontrolset\Control\Lsa" | select-string 'LimitBlankPasswordUse').ToString().Split('')[12].Trim() ) {
@@ -1498,11 +1490,7 @@ Try {
  Get-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Control\Lsa -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" 2> $null | select-string 'SCENoApplyLegacyAuditPolicy' 2> $null |  Measure-Object | % { $_.Count })
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -1543,11 +1531,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\System\Currentcontrolset\Control\Lsa' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\Currentcontrolset\Control\Lsa
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\Currentcontrolset\Control\Lsa")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\System\Currentcontrolset\Control\Lsa" 2> $null | select-string 'CrashOnAuditFail' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\System\Currentcontrolset\Control\Lsa" | select-string 'CrashOnAuditFail').ToString().Split('')[12].Trim() ) {
@@ -1590,11 +1574,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
- $path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
------------------------------------------------
-Tác động: 
-EOF
-)")
+ $path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon")
  $unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" 2> $null | select-string 'AllocateDASD' 2> $null |  Measure-Object | % { $_.Count })
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -1634,11 +1614,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\System\Currentcontrolset\Control\Print\Providers\Lanman Print Services\Servers' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
- $path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\Currentcontrolset\Control\Print\Providers\Lanman Print Services\Servers
------------------------------------------------
-Tác động: 
-EOF
-)")
+ $path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\Currentcontrolset\Control\Print\Providers\Lanman Print Services\Servers")
  $unique = (REG QUERY "HKEY_LOCAL_MACHINE\System\Currentcontrolset\Control\Print\Providers\Lanman Print Services\Servers" 2> $null | select-string 'AddPrinterDrivers' 2> $null |  Measure-Object | % { $_.Count })
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -1684,11 +1660,7 @@ Try {
  Get-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Control\Lsa -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" 2> $null | select-string 'SubmitControl' 2> $null |  Measure-Object | % { $_.Count })
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -1728,11 +1700,7 @@ Try {
  Get-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters" 2> $null | select-string 'RefusePasswordChange' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters" | select-string 'RefusePasswordChange').ToString().Split('')[12].Trim() ) {
@@ -1799,11 +1767,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Services\Netlogon\Parameters' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters" 2> $null | select-string 'SealSecureChannel' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters" | select-string 'SealSecureChannel').ToString().Split('')[12].Trim() ) {
@@ -1842,11 +1806,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Services\Netlogon\Parameters' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters" 2> $null | select-string 'SignSecureChannel' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters" | select-string 'SignSecureChannel').ToString().Split('')[12].Trim() ) {
@@ -1885,11 +1845,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Services\Netlogon\Parameters' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters" 2> $null | select-string 'DisablePasswordChange' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters" | select-string 'DisablePasswordChange').ToString().Split('')[12].Trim() ) {
@@ -1928,11 +1884,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Services\Netlogon\Parameters' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters" 2> $null | select-string 'MaximumPasswordAge' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters" | select-string 'MaximumPasswordAge').ToString().Split('')[12].Trim() ) {
@@ -1971,11 +1923,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Services\Netlogon\Parameters' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters" 2> $null | select-string 'RequireStrongKey' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters" | select-string 'RequireStrongKey').ToString().Split('')[12].Trim() ) {
@@ -2018,11 +1966,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" 2> $null | select-string 'DontDisplayLastUserName' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" | select-string 'DontDisplayLastUserName').ToString().Split('')[12].Trim() ) {
@@ -2061,11 +2005,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System" 2> $null | select-string 'DisableCAD' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System" | select-string 'DisableCAD').ToString().Split('')[12].Trim() ) {
@@ -2105,11 +2045,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" 2> $null | select-string 'InactivityTimeoutSecs' 2> $null |  Measure-Object | % { $_.Count })
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -2149,11 +2085,7 @@ Try {
  Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" 2> $null | select-string 'LegalNoticeText' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ($unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" | select-string 'LegalNoticeText' | Foreach { "$(($_ -split '\s+',4)[3])" } | select-string -pattern "[A-z][a-z]" | Measure-Object | % { $_.Count })) {
@@ -2193,11 +2125,7 @@ Try {
  Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" 2> $null | select-string 'LegalNoticeCaption' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" | select-string 'LegalNoticeCaption' | Foreach { "$(($_ -split '\s+',4)[3])" } | select-string -pattern "[A-z][a-z]" | Measure-Object | % { $_.Count })) {
@@ -2236,11 +2164,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" 2> $null | select-string 'PasswordExpiryWarning' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" | select-string 'PasswordExpiryWarning').ToString().Split('')[12].Trim() ) {
@@ -2283,11 +2207,7 @@ Try {
  Get-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" 2> $null | select-string 'EnableSecuritySignature' 2> $null |  Measure-Object | % { $_.Count })
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -2327,11 +2247,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Services\LanmanWorkstation\Parameters' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\LanmanWorkstation\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\LanmanWorkstation\Parameters")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\LanmanWorkstation\Parameters" 2> $null | select-string 'EnablePlainTextPassword' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\LanmanWorkstation\Parameters" | select-string 'EnablePlainTextPassword').ToString().Split('')[12].Trim() ) {
@@ -2371,11 +2287,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException]
 {
-   $path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+   $path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters")
    $unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters" 2> $null | select-string 'RequireSecuritySignature' 2> $null |  Measure-Object | %{$_.Count})
 
 if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -2419,11 +2331,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\System\Currentcontrolset\Services\Lanmanserver\Parameters' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\Currentcontrolset\Services\Lanmanserver\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\System\Currentcontrolset\Services\Lanmanserver\Parameters")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\System\Currentcontrolset\Services\Lanmanserver\Parameters" 2> $null | select-string 'AutoDisconnect' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\System\Currentcontrolset\Services\Lanmanserver\Parameters" | select-string 'AutoDisconnect').ToString().Split('')[12].Trim() ) {
@@ -2462,11 +2370,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" 2> $null | select-string 'enableforcedlogoff' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" | select-string 'enableforcedlogoff').ToString().Split('')[12].Trim() ) {
@@ -2507,11 +2411,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException]
 {
-$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters")
 $unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" 2> $null | select-string 'RequireSecuritySignature' 2> $null |  Measure-Object | %{$_.Count})
 if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 	foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" | select-string 'RequireSecuritySignature').ToString().Split('')[12].Trim() ) {
@@ -2550,11 +2450,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException]
 {
-$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters")
 $unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" 2> $null | select-string 'EnableSecuritySignature' 2> $null |  Measure-Object | %{$_.Count})
 if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 	foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" | select-string 'EnableSecuritySignature').ToString().Split('')[12].Trim() ) {
@@ -2593,11 +2489,7 @@ Try {
 	Get-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" 2> $null | select-string 'SMBServerNameHardeningLevel' 2> $null |  Measure-Object | %{$_.Count})
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -2662,11 +2554,7 @@ Try {
 	Get-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" 2> $null | select-string 'RestrictAnonymousSAM' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" | select-string 'RestrictAnonymousSAM').ToString().Split('')[12].Trim() ) {
@@ -2744,11 +2632,7 @@ Try {
 	Get-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" 2> $null | select-string 'EveryoneIncludesAnonymous' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" | select-string 'EveryoneIncludesAnonymous').ToString().Split('')[12].Trim() ) {
@@ -2915,11 +2799,7 @@ Try {
 	Get-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" 2> $null | select-string 'RestrictNullSessAccess' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" | select-string 'RestrictNullSessAccess').ToString().Split('')[12].Trim() ) {
@@ -2960,11 +2840,7 @@ Try {
  Get-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" 2> $null | select-string 'NullSessionShares' 2> $null |  Measure-Object | % { $_.Count })
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -3007,11 +2883,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" 2> $null | select-string 'ForceGuest' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" | select-string 'ForceGuest').ToString().Split('')[12].Trim() ) {
@@ -3052,11 +2924,7 @@ Try {
 	Get-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0 -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0" 2> $null | select-string 'AllowNullSessionFallback' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0" | select-string 'AllowNullSessionFallback').ToString().Split('')[12].Trim() ) {
@@ -3095,11 +2963,7 @@ Try {
 	Get-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\pku2u -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\pku2u
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\pku2u")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\pku2u" 2> $null | select-string 'AllowOnlineID' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\pku2u" | select-string 'AllowOnlineID').ToString().Split('')[12].Trim() ) {
@@ -3137,11 +3001,7 @@ Try {
  Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters" 2> $null | select-string 'SupportedEncryptionTypes' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\Kerberos\Parameters" | select-string 'SupportedEncryptionTypes').ToString().Split('')[12].Trim() ) {
@@ -3180,11 +3040,7 @@ Try {
 	Get-ItemProperty -Path HKLM:\SYSTEM\CurrentControlSet\Control\Lsa -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" 2> $null | select-string 'NoLMHash' 2> $null |  Measure-Object | % { $_.Count })
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -3249,11 +3105,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException]
 {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" 2> $null | select-string 'UseMachineId' 2> $null |  Measure-Object | %{$_.Count})
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" | select-string 'UseMachineId').ToString().Split('')[12].Trim() ) {
@@ -3293,11 +3145,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException]
 {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa" 2> $null | select-string 'LmCompatibilityLevel' 2> $null |  Measure-Object | %{$_.Count})
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -3337,11 +3185,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException]
 {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LDAP
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LDAP")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LDAP" 2> $null | select-string 'LDAPClientIntegrity' 2> $null |  Measure-Object | %{$_.Count})
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -3380,11 +3224,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException]
 {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0" 2> $null | select-string 'NTLMMinClientSec' 2> $null |  Measure-Object | %{$_.Count})
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -3425,11 +3265,7 @@ Try {
 Catch [System.Management.Automation.PSArgumentException]
 {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0" 2> $null | select-string 'NTLMMinServerSec' 2> $null |  Measure-Object | %{$_.Count})
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -3472,11 +3308,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" 2> $null | select-string 'ShutdownWithoutLogon' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" | select-string 'ShutdownWithoutLogon').ToString().Split('')[12].Trim() ) {
@@ -3520,11 +3352,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" 2> $null | select-string 'ObCaseInsensitive' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel" | select-string 'ObCaseInsensitive').ToString().Split('')[12].Trim() ) {
@@ -3563,11 +3391,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException]
 {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager" 2> $null | select-string 'ProtectionMode' 2> $null |  Measure-Object | %{$_.Count})
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager" | select-string 'ProtectionMode').ToString().Split('')[12].Trim() ) {
@@ -3609,11 +3433,7 @@ Try {
 Catch [System.Management.Automation.PSArgumentException]
 {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" 2> $null | select-string 'FilterAdministratorToken' 2> $null |  Measure-Object | %{$_.Count})
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" | select-string 'FilterAdministratorToken').ToString().Split('')[12].Trim() ) {
@@ -3652,11 +3472,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" 2> $null | select-string 'ConsentPromptBehaviorAdmin' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" | select-string 'ConsentPromptBehaviorAdmin').ToString().Split('')[12].Trim() ) {
@@ -3696,11 +3512,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" 2> $null | select-string 'EnableInstallerDetection' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" | select-string 'EnableInstallerDetection').ToString().Split('')[12].Trim() ) {
@@ -3740,11 +3552,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" 2> $null | select-string 'EnableSecureUIAPaths' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" | select-string 'EnableSecureUIAPaths').ToString().Split('')[12].Trim() ) {
@@ -3786,11 +3594,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" 2> $null | select-string 'EnableLUA' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" | select-string 'EnableLUA').ToString().Split('')[12].Trim() ) {
@@ -3829,11 +3633,7 @@ Try {
  Get-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" 2> $null | select-string 'PromptOnSecureDesktop' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" | select-string 'PromptOnSecureDesktop').ToString().Split('')[12].Trim() ) {
@@ -3872,11 +3672,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" 2> $null | select-string 'EnableVirtualization' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" | select-string 'EnableVirtualization').ToString().Split('')[12].Trim() ) {
@@ -3917,11 +3713,7 @@ Try {
 Catch [System.Management.Automation.PSArgumentException]
 {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" 2> $null | select-string 'ConsentPromptBehaviorUser' 2> $null |  Measure-Object | %{$_.Count})
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" | select-string 'ConsentPromptBehaviorUser').ToString().Split('')[12].Trim() ) {
@@ -3968,11 +3760,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile" 2> $null | select-string 'EnableFirewall' 2> $null |  Measure-Object | % { $_.Count })
 	
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -4014,11 +3802,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile" 2> $null | select-string 'DefaultInboundAction' 2> $null |  Measure-Object | % { $_.Count })
 	
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -4101,11 +3885,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging" 2> $null | select-string ' LogFilePath' 2> $null |  Measure-Object | % { $_.Count })
 	
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -4232,11 +4012,7 @@ Try {
  Get-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging' -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile\Logging" 2> $null | select-string 'LogSuccessfulConnections' 2> $null |  Measure-Object | % { $_.Count })
 	
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -4278,11 +4054,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException]
 {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile" 2> $null | select-string 'DisableNotifications' 2> $null |  Measure-Object | %{$_.Count})
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile" | select-string 'DisableNotifications').ToString().Split('')[12].Trim() ) {
@@ -4454,11 +4226,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging" 2> $null | select-string ' LogFilePath' 2> $null |  Measure-Object | % { $_.Count })
 	
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -4543,11 +4311,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile\Logging" 2> $null | select-string ' LogDroppedPackets' 2> $null |  Measure-Object | % { $_.Count })
 	
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -4631,11 +4395,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException]
 {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PrivateProfile" 2> $null | select-string 'DisableNotifications' 2> $null |  Measure-Object | %{$_.Count})
 		
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -4680,11 +4440,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile" 2> $null | select-string 'EnableFirewall' 2> $null |  Measure-Object | % { $_.Count })
 	
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -4728,11 +4484,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile" 2> $null | select-string 'DefaultInboundAction' 2> $null |  Measure-Object | % { $_.Count })
 	
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -4819,11 +4571,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging" 2> $null | select-string ' LogFilePath' 2> $null |  Measure-Object | % { $_.Count })
 	
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -4955,11 +4703,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile\Logging" 2> $null | select-string 'LogSuccessfulConnections' 2> $null |  Measure-Object | % { $_.Count })
 	
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -5002,11 +4746,7 @@ Try {
 Catch [System.Management.Automation.PSArgumentException]
 {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile" 2> $null | select-string 'DisableNotifications' 2> $null |  Measure-Object | %{$_.Count})
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsFirewall\PublicProfile" | select-string 'DisableNotifications').ToString().Split('')[12].Trim() ) {
@@ -5792,11 +5532,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" 2> $null | select-string 'DisableLockScreenAppNotifications' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" | select-string 'DisableLockScreenAppNotifications').ToString().Split('')[12].Trim() ) {
@@ -5838,11 +5574,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" 2> $null | select-string 'BlockDomainPicturePassword' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" | select-string 'BlockDomainPicturePassword').ToString().Split('')[12].Trim() ) {
@@ -5885,11 +5617,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" 2> $null | select-string 'AllowDomainPINLogon' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" | select-string 'AllowDomainPINLogon').ToString().Split('')[12].Trim() ) {
@@ -5935,11 +5663,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51" 2> $null | select-string 'DCSettingIndex' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51" | select-string 'DCSettingIndex').ToString().Split('')[12].Trim() ) {
@@ -5984,11 +5708,7 @@ Catch [System.Management.Automation.PSArgumentException]
 {
 #  	5.1.5 (L1) - Ensure 'Do not display network selection UI' is set to 'Enabled' (Scored)
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" 2> $null | select-string 'DontDisplayNetworkSelectionUI' 2> $null |  Measure-Object | %{$_.Count})
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" | select-string 'DontDisplayNetworkSelectionUI').ToString().Split('')[12].Trim() ) {
@@ -6029,11 +5749,7 @@ Catch [System.Management.Automation.PSArgumentException]
 {
 #  	5.1.6 (L1) - Ensure 'Do not enumerate connected users on domainjoined computers' is set to 'Enabled' (Scored)
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" 2> $null | select-string 'DontEnumerateConnectedUsers' 2> $null |  Measure-Object | %{$_.Count})
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" | select-string 'DontEnumerateConnectedUsers').ToString().Split('')[12].Trim() ) {
@@ -6074,11 +5790,7 @@ Catch [System.Management.Automation.PSArgumentException]
 
 #  	5.1.7 (L1) - Ensure 'Enumerate local users on domain-joined computers' is set to 'Disabled' (MS only) (Scored)
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" 2> $null | select-string 'EnumerateLocalUsers' 2> $null |  Measure-Object | %{$_.Count})
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" | select-string 'EnumerateLocalUsers').ToString().Split('')[12].Trim() ) {
@@ -6124,11 +5836,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51" 2> $null | select-string 'DCSettingIndex' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51" | select-string 'DCSettingIndex').ToString().Split('')[12].Trim() ) {
@@ -6171,11 +5879,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51" 2> $null | select-string 'ACSettingIndex' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51" | select-string 'ACSettingIndex').ToString().Split('')[12].Trim() ) {
@@ -6221,11 +5925,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer" 2> $null | select-string 'NoAutoplayfornonVolume' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer" | select-string 'NoAutoplayfornonVolume').ToString().Split('')[12].Trim() ) {
@@ -6267,11 +5967,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" 2> $null | select-string 'NoAutorun' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" | select-string 'NoAutorun').ToString().Split('')[12].Trim() ) {
@@ -6314,11 +6010,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" 2> $null | select-string 'NoDriveTypeAutoRun' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" | select-string 'NoDriveTypeAutoRun').ToString().Split('')[12].Trim() ) {
@@ -6365,11 +6057,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application" 2> $null | select-string 'Retention' 2> $null |  Measure-Object | % { $_.Count })
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -6414,11 +6102,7 @@ Try {
  Get-ItemProperty -Path HKLM:\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application -Name version
 }
 Catch [System.Management.Automation.PSArgumentException] {
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application" 2> $null | select-string 'MaxSize' 2> $null |  Measure-Object | % { $_.Count })
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
 		foreach ( $unique1 in (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Application" | select-string 'MaxSize').ToString().Split('')[12].Trim() ) {
@@ -6463,11 +6147,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security" 2> $null | select-string 'Retention' 2> $null |  Measure-Object | % { $_.Count })
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -6514,11 +6194,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Security" 2> $null | select-string 'MaxSize' 2> $null |  Measure-Object | % { $_.Count })
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -6564,11 +6240,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Setup
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Setup")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Setup" 2> $null | select-string 'Retention' 2> $null |  Measure-Object | % { $_.Count })
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -6614,11 +6286,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Setup
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Setup")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\Setup" 2> $null | select-string 'MaxSize' 2> $null |  Measure-Object | % { $_.Count })
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -6664,11 +6332,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\System" 2> $null | select-string 'Retention' 2> $null |  Measure-Object | % { $_.Count })
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
@@ -6714,11 +6378,7 @@ Try {
 }
 Catch [System.Management.Automation.PSArgumentException] {
 
-	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\System
------------------------------------------------
-Tác động: 
-EOF
-)")
+	$path = (Test-Path "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\System")
 	$unique = (REG QUERY "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EventLog\System" 2> $null | select-string 'MaxSize' 2> $null |  Measure-Object | % { $_.Count })
 
 	if (( $path -eq 'True' ) -And ( $unique -eq '1' )) {
