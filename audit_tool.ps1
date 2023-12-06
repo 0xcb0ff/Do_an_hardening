@@ -54,16 +54,9 @@ if ($host.Name -eq 'ConsoleHost') {
     Write-Host "You are running in PowerShell environment"
 }
 
-function Test-IsAdmin {
-    $currentUser = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
-    $isAdmin = $currentUser.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
-    return $isAdmin
-}
+$currentUser = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+$isAdmin = $currentUser.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
-if (-not (Test-IsAdmin)) {
-    Write-Host "This script requires administrator privileges. Please run as administrator."
-    Exit
-}
 if (-not $IsAdmin) {
     Write-Host "This script requires administrator privileges. Please run as administrator."
     Exit

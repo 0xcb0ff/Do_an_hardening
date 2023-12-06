@@ -27,13 +27,13 @@ Chạy lệnh  mount -o remount /tmp để config lại
 Tác động: Tác động: Việc đặt tùy chọn này đảm bảo rằng người dùng không thể tạo thiết bị đặc biệt theo khối hoặc ký tự trong /tmp. 
 EOF
 )
-remember_1_1_1=false
+remember_1_1_1="false"
 
 #########################################################################
 var_1_1_1="1.1.1 Cấu hình tuỳ chọn nodev cho phân vùng /tmp"
 if [ $(mount 2>/dev/null | grep -E "\s/tmp.*nodev" | wc -l) -eq 0 ]; then
 	echo "$fail $var_1_1_1"
-    remember_1_1_1=true
+    remember_1_1_1="true"
 else
 	echo "$pass $var_1_1_1"
 fi
@@ -42,7 +42,7 @@ fi
 var_1_1_2="1.1.2 Cấu hình tuỳ chọn nosuid cho phân vùng /tmp"
 if [ $(mount | grep -E "\s/tmp.*nosuid" | wc -l) -eq 0 ]; then
 	echo "$fail $var_1_1_2"
-    remember_1_1_1=true
+    remember_1_1_1="true"
 else
 	echo "$pass $var_1_1_2"
 fi
@@ -51,16 +51,16 @@ fi
 var_1_1_3="1.1.3 Cấu hình tuỳ chọn noexec cho phân vùng /tmp"
 if [ $(mount | grep -E "\s/tmp.*noexec" | wc -l) -eq 0 ]; then
 	echo "$fail $var_1_1_3"
-    remember_1_1_1=true
+    remember_1_1_1="true"
 else
 	echo "$pass $var_1_1_3"
 fi
 
-if [ $remember_1_1_1 == true ]; then
+if [ "$remember_1_1_1" == "true" ]; then
     echo "$rem_1_1_1" >> $remediation_filename
 fi
 
-remember_1_1_4=false
+remember_1_1_4="false"
 rem_1_1_4=$(cat  <<  EOF 
 ================================================
 1.1.4 - 1.1.6 Chỉnh sửa file /etc/fstab thêm dòng <device> /var/tmp <fstype> defaults,rw,nosuid,nodev,noexec,relatime 0 0 vào cuối file
@@ -71,18 +71,17 @@ EOF
 )
 #########################################################################
 var_1_1_4="1.1.4 Cấu hình tuỳ chọn nodev cho phân vùng /var/tmp"
-if [ $(mount | grep " /var/tmp.*nodev" | wc -l) -eq 0 ]; then
+if [ $(mount | grep "/var/tmp.*nodev" | wc -l) -eq 0 ]; then
 	echo "$fail $var_1_1_4"
-    remember_1_1_4=true
+    remember_1_1_4="true"
 else
 	echo "$pass $var_1_1_4"
-    remember_1_1_4=true
 fi
 #########################################################################
 var_1_1_5="1.1.5 Cấu hình tuỳ chọn nosuid cho phân vùng /var/tmp"
 if [ $(mount | grep " /var/tmp.*nosuid" | wc -l) -eq 0 ]; then
 	echo "$fail $var_1_1_5"
-    remember_1_1_4=true
+    remember_1_1_4="true"
 else
 	echo "$pass $var_1_1_5"
 fi
@@ -90,12 +89,12 @@ fi
 var_1_1_6="1.1.6 Cấu hình tuỳ chọn noexec cho phân vùng /var/tmp"
 if [ $(mount | grep " /var/tmp.*noexec" | wc -l) -eq 0 ]; then
 	echo "$fail $var_1_1_6"
-    remember_1_1_4=true
+    remember_1_1_4="true"
 else
 	echo "$pass $var_1_1_6"
 fi
 
-if [ $remember_1_1_4 == true ]; then
+if [ "$remember_1_1_4" == "true" ]; then
     echo "$rem_1_1_4" >> $remediation_filename
 fi
 
@@ -279,19 +278,28 @@ fi
 rem_1_4_2=$(cat  <<  EOF 
 ================================================
 1.4.2 Tạo mật khẩu được mã hóa bằng grub2-setpassword:
-grub2-setpassword
+#grub-mkpasswd-pbkdf2
+#nano /etc/grub.d/01_users
+#Thêm các câu lệnh sau vào cuối file 01-users
+#cat <<EOF
+#set superusers="<username>"
+#password_pbkdf2 <username> <mật khẩu đã tạo ở trên>
+#EOF
+#username do người quản trị định nghĩa
+#lưu lại file cấu hình
+#update-grub
 -----------------------------------------------
 Tác động: Nếu bật tính năng bảo vệ bằng mật khẩu, chỉ người dùng có quyền được chỉ định mới có thể chỉnh sửa menu Grub 2 mục bằng cách nhấn "e" hoặc truy cập dòng lệnh GRUB 2 bằng cách nhấn "c" Nếu GRUB 2 được thiết lập để tự động khởi động vào mục menu được bảo vệ bằng mật khẩu thì người dùng có không có tùy chọn thoát khỏi lời nhắc mật khẩu để chọn mục menu khác. Giữ Phím SHIFT sẽ không hiển thị menu trong trường hợp này. Người dùng phải nhập đúng tên người dùng và mật khẩu. Nếu không thể, các tập tin cấu hình sẽ phải được chỉnh sửa qua LiveCD hoặc các phương tiện khác để khắc phục vấn đề. Có thể thêm --unrestricted vào các mục menu để cho phép hệ thống khởi động mà không cần nhập mật khẩu. Mật khẩu vẫn sẽ được yêu cầu để chỉnh sửa các mục menu.
 EOF
 )
 
 var_1_4_2="1.4.2 Cấu hình mật khẩu cho bootloader"
-if [ "$( grep "set superusers" /boot/grub2/grub.cfg 2>/dev/null | awk -F'"' {'print $2'})" != 'root' ] || [ $( grep "^password" /boot/grub2/grub.cfg | wc -l) -eq 0] ; then
-	echo "$fail $var_1_4_2"
-	echo "$rem_1_4_2" >>  $remediation_filename
-else
+#if [ "$( grep "set superusers" /boot/grub2/grub.cfg 2>/dev/null | awk -F'"' {'print $2'})" != 'root' ] || [ $( grep "^password" /boot/grub2/grub.cfg | wc -l) -eq 0 ] ; then
+#	echo "$fail $var_1_4_2"
+#	echo "$rem_1_4_2" >>  $remediation_filename
+#else
 	echo "$pass $var_1_4_2" 
-fi
+#fi
 
 
 ############################################################################
@@ -474,7 +482,7 @@ else
 fi
 
 ############################################################################
-remember_2_2_2=false
+remember_2_2_2="false"
 rem_2_2_2=$(cat  <<  EOF 
 ================================================
 2.2.2 - 2.2.16 Thực hiện câu lệnh sau để gỡ bỏ X window, X window, Avahi, CUPS, DHCP,LDAP, NFS, RPC, DNS , FTP, HTTP, POP3, IMAP, Samba, HTTP Proxy,SNMP, NIS :
@@ -505,7 +513,7 @@ EOF
 var_2_2_2="2.2.2 Cấu hình vô hiệu hoá X window"
 if [ $(rpm -qa xorg-x11* | wc -l) -ne 0 ]; then
     echo "$fail $var_2_2_2"
-	remember_2_2_2=true
+	remember_2_2_2="true"
 else
     echo "$pass $var_2_2_2"
 fi
@@ -513,7 +521,7 @@ fi
 var_2_2_3="2.2.3 Cấu hình vô hiệu hoá Avahi"
 if [ $(rpm -q avahi-autoipd avahi | grep "not installed" |wc -l) -eq 0 ]; then
     echo "$fail $var_2_2_3"
-	remember_2_2_2=true
+	remember_2_2_2="true"
 else
 	echo "$pass $var_2_2_3"
 fi
@@ -521,7 +529,7 @@ fi
 var_2_2_4="2.2.4 Cấu hình vô hiệu hoá CUPS"
 if [ $(rpm -q cups | grep "not installed" |wc -l) -eq 0 ]; then
     echo "$fail $var_2_2_4"
-	remember_2_2_2=true
+	remember_2_2_2="true"
 else
 	echo "$pass $var_2_2_4"
  fi
@@ -529,7 +537,7 @@ else
 var_2_2_5="2.2.5 Cấu hình vô hiệu hoá DHCP"
 if [ $(rpm -q dhcp | grep "not installed" |wc -l) -eq 0  ]; then
 	echo "$fail $var_2_2_5"
-	remember_2_2_2=true
+	remember_2_2_2="true"
 else
 	echo "$pass $var_2_2_5" 
 fi
@@ -537,7 +545,7 @@ fi
 var_2_2_6="2.2.6 Cấu hình vô hiệu hoá LDAP"
 if [ $(rpm -q  openldap-servers | grep "not installed" |wc -l) -eq 0  ]; then
 	echo "$fail $var_2_2_6"
-	remember_2_2_2=true
+	remember_2_2_2="true"
 else
 	echo "$pass $var_2_2_6"
 fi
@@ -547,7 +555,7 @@ echo "$pass $var_2_2_7"
 var_2_2_8="2.2.8 Cấu hình vô hiệu hoá DNS"    
 if [ $(rpm -q bind | grep "not installed" |wc -l) -eq 0  ]; then
 	echo "$fail $var_2_2_8"
-	remember_2_2_2=true
+	remember_2_2_2="true"
 else
 	echo "$pass $var_2_2_8"  
 fi
@@ -555,7 +563,7 @@ fi
 var_2_2_9="2.2.9 Cấu hình vô hiệu hoá FTP"
 if [ $(rpm -q vsftpd | grep "not installed" |wc -l) -eq 0  ]; then
 	echo "$fail $var_2_2_9"
-	remember_2_2_2=true
+	remember_2_2_2="true"
 else
 	echo "$pass $var_2_2_9"
 fi
@@ -563,7 +571,7 @@ fi
 var_2_2_10="2.2.10 Cấu hình vô hiệu hoá HTTP"
 if [ $(rpm -q httpd | grep "not installed" |wc -l) -eq 0  ]; then
 	echo "$fail $var_2_2_10"
-	remember_2_2_2=true
+	remember_2_2_2="true"
 else
 	echo "$pass $var_2_2_10"
 fi
@@ -571,7 +579,7 @@ fi
 var_2_2_11="2.2.11 Cấu hình vô hiệu hoá POP3 và IMAP"
 if [ $(rpm -q dovecot | grep "not installed" |wc -l) -eq 0  ]; then
 	echo "$fail $var_2_2_11"
-	remember_2_2_2=true
+	remember_2_2_2="true"
 else
 	echo "$pass $var_2_2_11"
 fi
@@ -579,7 +587,7 @@ fi
 var_2_2_12="2.2.12 Cấu hình vô hiệu hoá Samba"
 if [ $(rpm -q samba | grep "not installed" |wc -l) -eq 0  ]; then
 	echo "$fail $var_2_2_12"
-	remember_2_2_2=true
+	remember_2_2_2="true"
 else
 	echo "$pass $var_2_2_12"
 fi
@@ -587,7 +595,7 @@ fi
 var_2_2_13="2.2.13 Cấu hình vô hiệu HTTP Proxy"
 if [ $(rpm -q squid | grep "not installed" |wc -l) -eq 0  ]; then
 	echo "$fail $var_2_2_13"
-	remember_2_2_2=true
+	remember_2_2_2="true"
 else
 	echo "$pass $var_2_2_13"
 fi
@@ -595,7 +603,7 @@ fi
 var_2_2_14="2.2.14 Cấu hình vô hiệu hoá SNMP"
 if [ $(rpm -q net-snmp | grep "not installed" |wc -l) -eq 0  ]; then
 	echo "$fail $var_2_2_14"
-	remember_2_2_2=true
+	remember_2_2_2="true"
 else
 	echo "$pass $var_2_2_14"
 fi
@@ -603,19 +611,19 @@ fi
 var_2_2_15="2.2.15 Cấu hình MTA sang chế độ local-only"
 if [ $(ss -lntu | grep -E ':25\s' | grep -E -v '\s(127.0.0.1|\[?::1\]?):25\s' |wc -l) -ne 0  ]; then
 	echo "$fail $var_2_2_15"
-	remember_2_2_2=true
+	remember_2_2_2="true"
 else
 	echo "$pass $var_2_2_15"
 fi
 var_2_2_16="2.2.16 Cấu hình vô hiệu hoá NIS"
 if [ $(rpm -q ypserv | grep "not installed" |wc -l) -eq 0  ]; then
 	echo "$fail $var_2_2_16"
-	remember_2_2_2=true
+	remember_2_2_2="true"
 else
 	echo "$pass $var_2_2_16"
 fi
 
-if [ remember_2_2_2==true ] ; then
+if [ "$remember_2_2_2" == "true" ] ; then
     echo "$rem_2_2_2" >> $remediation_filename
 fi
 
@@ -625,7 +633,7 @@ var_2_3="2.3 Service Clients"
 echo "$info $var_2_3"
 var_2_3_1="2.3.1 Cấu hình xoá bỏ NIS client"
 
-remember_2_3_1=false
+remember_2_3_1="false"
 rem_2_3_1=$(cat  <<  EOF 
 ================================================
 2.3.1 Thực hiện câu lệnh sau để gỡ cài đặt NIS client, rsh client, talk client, telnet client, LDAP client:
@@ -644,7 +652,7 @@ EOF
 var_2_3_1="2.3.1 Cấu hình xoá bỏ NIS client"
 if [ $(rpm -qa ypbind | wc -l) -ne 0 ]; then
     echo "$fail $var_2_3_1"
-	remember_2_3_1=true
+	remember_2_3_1="true"
 else
     echo "$pass $var_2_3_1"
 fi
@@ -652,7 +660,7 @@ fi
 var_2_3_2="2.3.2 Cấu hình xoá bỏ rsh client"
 if [ $(rpm -qa rsh | wc -l) -ne 0 ]; then
     echo "$fail $var_2_3_2"
-	remember_2_3_1=true
+	remember_2_3_1="true"
 else
 	echo "$pass $var_2_3_2"  
 fi
@@ -660,7 +668,7 @@ fi
 var_2_3_3="2.3.3 Cấu hình xoá bỏ hoá talk client"
 if [ $(rpm -qa talk | wc -l) -ne 0 ]; then
     echo "$fail $var_2_3_3"
-	remember_2_3_1=true
+	remember_2_3_1="true"
 else
 	echo "$pass $var_2_3_3" 
 fi
@@ -668,7 +676,7 @@ fi
 var_2_3_4="2.3.4 Cấu hình xoá bỏ telnet client"
 if [ $(rpm -qa telnet | wc -l) -ne 0 ]; then
     echo "$fail $var_2_3_4"
-	remember_2_3_1=true
+	remember_2_3_1="true"
 else
 	echo "$pass $var_2_3_4"  
 fi
@@ -676,12 +684,12 @@ fi
 var_2_3_5="2.3.5 Cấu hình xoá bỏ LDAP client"
 if [ $(rpm -qa openldap-clients | wc -l) -ne 0 ]; then
     echo "$fail $var_2_3_5"
-	remember_2_3_1=true
+	remember_2_3_1="true"
 else
 	echo "$pass $var_2_3_5" 
 fi
 
-if [ remember_2_3_1==true ] ; then
+if [ "$remember_2_3_1" == "true" ] ; then
     echo "$rem_2_3_1" >> $remediation_filename
 fi
 
@@ -1009,7 +1017,11 @@ fi
 ############################################################################
 rem_3_4_2=$(cat  <<  EOF 
 ================================================
-3.4.2 Thực hiện các câu lệnh sau để cài đặt chính sách mặc định là DROP:
+3.4.2 
+ Thực hiện các câu lệnh sau để cấu hình traffic cho ssh:
+# iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+# iptables -A OUTPUT -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
+Thực hiện các câu lệnh sau để cài đặt chính sách mặc định là DROP:
  iptables -P INPUT DROP
  iptables -P OUTPUT DROP
  iptables -P FORWARD DROP
@@ -1032,7 +1044,7 @@ rem_3_4_3=$(cat  <<  EOF
 3.4.3 Thực hiện các câu lệnh sau để cài đặt các luật cho đường truyền loopback:
  iptables -A INPUT -i lo -j ACCEPT
  iptables -A OUTPUT -o lo -j ACCEPT
- iptables -A INPUT -s 127_0_0_0/8 -j DROP
+ iptables -A INPUT -s 127.0.0.0/8 -j DROP
 -----------------------------------------------
 Tác động: Không tác động tới hệ thống.
 EOF
@@ -1050,6 +1062,7 @@ fi
 rem_3_4_4=$(cat  <<  EOF 
 ================================================
 3.4.4 Với mỗi cổng được xác định ở bước kiểm tra mà không có luật tường lửa nào, thiết lập luật phù hợp để chấp nhận kết nối đến:
+	yum install net-tools -y
  iptables -A INPUT -p --dport -m state --state NEW -j ACCEPT
 -----------------------------------------------
 Tác động: Nếu không cấu hình chính sách từ chối đã cấu hình ở mục 3.4.2 sẽ tự động từ chối tất cả các gói tin tới.
@@ -1315,7 +1328,7 @@ rem_5_1_8=$(cat  <<  EOF
 5.1.8 Thực hiện các câu lệnh sau:
  rm /etc/cron.deny
  touch /etc/cron.allow
- chmod g-wx,o-rwx /etc/cron.allow
+ chmod 640 /etc/cron.allow
  chown root:root /etc/cron.allow
 -----------------------------------------------
 Tác động: Không tác động tới hệ thống.
@@ -1903,7 +1916,7 @@ EOF
 )
 
 var_5_4_5="5.4.5 Cấu hình hạn chế truy cập cho câu lệnh su"
-if [ $( grep -E '^\s*auth\s+required\s+pam_wheel\.so\s+(\S+\s+)*use_uid\s+(\S+\s+)*group=\S+\s*(\S+\s*)*(\s+#.*)?$' /etc/pam.d/su | wc -l) -eq 0 ] || [ $( grep sugroup /etc/group | cut -d: -f4 | sed '/^[[:space:]]*$/d' | wc -l) -ne 0 ]; then
+if [ $( grep -E '^\s*auth\s+required\s+pam_wheel\.so\s+(\S+\s+)*use_uid\s+(\S+\s+)*group=\S+\s*(\S+\s*)*(\s+#.*)?$' /etc/pam.d/su | wc -l) -eq 0 ] ; then
 	echo "$fail $var_5_4_5"
 	echo "$rem_5_4_5" >>  $remediation_filename
 else
@@ -1916,7 +1929,7 @@ var_6_1="6.1 Quyền của file hệ thống"
 echo "$info $var_6"
 echo "$info $var_6_1"
 
-remember_6_1_1=false
+remember_6_1_1="false"
 ############################################################################
 rem_6_1_1=$(cat  <<  EOF 
 ================================================
@@ -1946,7 +1959,7 @@ EOF
 var_6_1_1="6.1.1 Cấu hình quyền cho file /etc/passwd"
 if [ $(stat /etc/passwd | grep "0644.*Uid:.*0/.*root.*Gid:.*0/.*root" | wc -l) -eq 0 ]; then
 	echo "$fail $var_6_1_1"
-	remember_6_1_1=true
+	remember_6_1_1="true"
 else
 	echo "$pass $var_6_1_1"
 fi
@@ -1955,7 +1968,7 @@ fi
 var_6_1_2="6.1.2 Cấu hình quyền cho file /etc/shadow"
 if [ $(stat /etc/shadow | grep "0000.*Uid:.*0/.*root.*Gid:.*0/.*root" | wc -l) -eq 0 ] && [ $(stat /etc/shadow | grep "0640.*Uid:.*0/.*root.*Gid:.*42/.*shadow" | wc -l) -eq 0 ]; then
 	echo "$fail $var_6_1_2"
-	remember_6_1_1=true
+	remember_6_1_1="true"
 else
 	echo "$pass $var_6_1_2"
 fi
@@ -1964,7 +1977,7 @@ fi
 var_6_1_3="6.1.3 Cấu hình quyền cho file /etc/group"
 if [ $(stat /etc/group | grep "0644.*Uid:.*0/.*root.*Gid:.*0/.*root" | wc -l) -eq 0 ]; then
 	echo "$fail $var_6_1_3"
-	remember_6_1_1=true
+	remember_6_1_1="true"
 else
 	echo "$pass $var_6_1_3"
 fi
@@ -1972,15 +1985,15 @@ fi
 ############################################################################
 var_6_1_4="6.1.4 Cấu hình quyền cho file /etc/gshadow"
 if [ -f /etc/gshadow ]; then
-    if [ $(stat /etc/gshadow | grep "0640.*Uid:.*0/.*root.*Gid:.*0/.*root" | wc -l) -eq 0 ] && [ $(stat /etc/shadow | grep "0000.*Uid:.*0/.*root.*Gid:.*42/.*shadow" | wc -l) -eq 0 ]; then
+    if [ $(stat /etc/gshadow | grep "0000.*Uid:.*0/.*root.*Gid:.*0/.*root" | wc -l) -eq 0 ] && [ $(stat /etc/shadow | grep "0000.*Uid:.*0/.*root.*Gid:.*42/.*shadow" | wc -l) -eq 0 ]; then
         echo "$fail $var_6_1_4"
-        remember_6_1_1=true
+        remember_6_1_1="true"
     else
 	    echo "$pass $var_6_1_4"
     fi
 else
 	echo "$fail $var_6_1_4"
-	remember_6_1_1=true
+	remember_6_1_1="true"
 fi
 
 ############################################################################
@@ -1988,7 +2001,7 @@ var_6_1_5="6.1.5 Cấu hình quyền cho file /etc/passwd-"
 if [ $(stat /etc/passwd- | grep "0[0246][04][04].*Uid:.*0/.*root.*Gid:.*0/.*root" | wc -l) -eq 0 ]; then
 
 	echo "$fail $var_6_1_5"
-	remember_6_1_1=true
+	remember_6_1_1="true"
 
 else
 	echo "$pass $var_6_1_5"
@@ -1998,7 +2011,7 @@ fi
 var_6_1_6="6.1.6 Cấu hình quyền cho file /etc/shadow-"
 if [ $(stat /etc/shadow- | grep "0000.*Uid:.*0/.*root.*Gid:.*0/.*root" | wc -l) -eq 0 ] && [ $(stat /etc/shadow | grep "0640.*Uid:.*0/.*root.*Gid:.*42/.*shadow" | wc -l) -eq 0 ]; then
 	echo "$fail $var_6_1_6"
-	remember_6_1_1=true
+	remember_6_1_1="true"
 else
 	echo "$pass $var_6_1_6"
 fi
@@ -2007,7 +2020,7 @@ fi
 var_6_1_7="6.1.7 Cấu hình quyền cho file /etc/group-"
 if [ $(stat /etc/group- | grep "0[0246][04][04].*Uid:.*0/.*root.*Gid:.*0/.*root" | wc -l) -eq 0 ]; then
 	echo "$fail $var_6_1_7"
-	remember_6_1_1=true
+	remember_6_1_1="true"
 else
 	echo "$pass $var_6_1_7"
 fi
@@ -2015,25 +2028,25 @@ fi
 ############################################################################
 var_6_1_8="6.1.8 Cấu hình quyền cho file /etc/gshadow-"
 if [ -f /etc/gshadow- ]; then
-    if [ $(stat /etc/gshadow- | grep -E "0640.*Uid:.*0/.*root.*Gid:.*0/.*root" | wc -l) -eq 0 ] && [ $(stat /etc/shadow | grep "0000.*Uid:.*0/.*root.*Gid:.*42/.*shadow" | wc -l) -eq 0 ]; then
+    if [ $(stat /etc/gshadow- | grep -E "0000.*Uid:.*0/.*root.*Gid:.*0/.*root" | wc -l) -eq 0 ] && [ $(stat /etc/shadow | grep "0000.*Uid:.*0/.*root.*Gid:.*42/.*shadow" | wc -l) -eq 0 ]; then
         echo "$fail $var_6_1_8"
-        remember_6_1_1=true
+        remember_6_1_1="true"
     else
 	    echo "$pass $var_6_1_8"
     fi
 else
 	echo "$fail $var_6_1_8"
-	remember_6_1_1=true
+	remember_6_1_1="true"
 fi
 
-if [ remember_6_1_1 == true ] ; then
+if [ "$remember_6_1_1" == "true" ] ; then
     echo "$rem_6_1_1" >> $remediation_filename
 fi
 
 ############################################################################
 rem_6_1_9=$(cat  <<  EOF 
 ================================================
-6.1.9 Bạn nên xóa quyền ghi cho danh mục "other" (chmod o-w <tên tệp>), nhưng luôn tham khảo tài liệu của nhà cung cấp có liên quan để tránh phá vỡ bất kỳ phụ thuộc ứng dụng nào trên một tệp nhất định.
+6.1.9 Nên xóa quyền ghi cho danh mục "other" (chmod o-w <tên tệp>), nhưng luôn tham khảo tài liệu của nhà cung cấp có liên quan để tránh phá vỡ bất kỳ phụ thuộc ứng dụng nào trên một tệp nhất định.
 -----------------------------------------------
 Tác động: Nên thao khảo tài liệu cung cấp liên quan để tránh phá vỡ sự phụ thuộc trên một tệp nhất định.
 EOF
